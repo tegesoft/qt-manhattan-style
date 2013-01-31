@@ -36,7 +36,7 @@
 
 #include <QtCore/QLibrary>
 
-#include <coreplugin/coreconstants.h>
+#include "coreconstants.h"
 
 #include <utils/qtcassert.h>
 #include "stylehelper.h"
