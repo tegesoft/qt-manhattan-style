@@ -41,7 +41,7 @@
 #include "qtcassert.h"
 #include "stylehelper.h"
 
-#include <utils/fancymainwindow.h>
+#include "fancymainwindow.h"
 
 #include <QtGui/QApplication>
 #include <QtGui/QComboBox>
