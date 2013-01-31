@@ -31,6 +31,7 @@ HEADERS +=\
     src/styleanimator.h \
     src/stringutils.h \
     src/qtcolorbutton.h \
+    src/qtcolorbutton_p.h \
     src/qtcassert.h \
     src/progressbar.h \
     src/minisplitter.h \
