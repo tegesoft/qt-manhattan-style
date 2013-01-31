@@ -35,9 +35,6 @@
 
 #include "stylehelper.h"
 
-#include <coreplugin/icore.h>
-#include <coreplugin/imode.h>
-
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QPainter>
 #include <QtGui/QPicture>
