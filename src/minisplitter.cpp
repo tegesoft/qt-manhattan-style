@@ -32,7 +32,7 @@
 
 #include "minisplitter.h"
 
-#include <utils/stylehelper.h>
+#include "stylehelper.h"
 
 #include <QtGui/QPaintEvent>
 #include <QtGui/QPainter>

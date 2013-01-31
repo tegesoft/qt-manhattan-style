@@ -39,7 +39,7 @@
 #include <coreplugin/coreconstants.h>
 
 #include <utils/qtcassert.h>
-#include <utils/stylehelper.h>
+#include "stylehelper.h"
 
 #include <utils/fancymainwindow.h>
 

@@ -33,7 +33,7 @@
 #include "fancyactionbar.h"
 #include "coreconstants.h"
 
-#include <utils/stylehelper.h>
+#include "stylehelper.h"
 
 #include <coreplugin/icore.h>
 #include <coreplugin/imode.h>

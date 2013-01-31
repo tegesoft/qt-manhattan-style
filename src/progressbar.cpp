@@ -32,7 +32,7 @@
 
 #include "progressbar.h"
 
-#include <utils/stylehelper.h>
+#include "stylehelper.h"
 
 #include <QtCore/QPropertyAnimation>
 #include <QtGui/QPainter>

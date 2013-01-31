@@ -31,7 +31,7 @@
 **************************************************************************/
 
 #include "fancytabwidget.h"
-#include <utils/stylehelper.h>
+#include "stylehelper.h"
 #include <utils/styledbar.h>
 
 #include <QtCore/QDebug>

@@ -33,7 +33,7 @@
 #include "doubletabwidget.h"
 #include "ui_doubletabwidget.h"
 
-#include <utils/stylehelper.h>
+#include "stylehelper.h"
 
 #include <QtCore/QRect>
 #include <QtGui/QPainter>
