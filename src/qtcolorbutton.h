@@ -33,13 +33,13 @@
 #ifndef QTCOLORBUTTON_H
 #define QTCOLORBUTTON_H
 
-#include "utils_global.h"
+#include "qt-manhattan-style_global.hpp"
 
 #include <QtGui/QToolButton>
 
 namespace Utils {
 
-class QTCREATOR_UTILS_EXPORT QtColorButton : public QToolButton
+class QTMANHATTANSTYLESHARED_EXPORT QtColorButton : public QToolButton
 {
     Q_OBJECT
     Q_PROPERTY(bool backgroundCheckered READ isBackgroundCheckered WRITE setBackgroundCheckered)

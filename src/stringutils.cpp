@@ -41,7 +41,7 @@
 
 namespace Utils {
 
-QTCREATOR_UTILS_EXPORT QString settingsKey(const QString &category)
+QTMANHATTANSTYLESHARED_EXPORT QString settingsKey(const QString &category)
 {
     QString rc(category);
     const QChar underscore = QLatin1Char('_');
@@ -68,7 +68,7 @@ static inline int commonPartSize(const QString &s1, const QString &s2)
     return size;
 }
 
-QTCREATOR_UTILS_EXPORT QString commonPrefix(const QStringList &strings)
+QTMANHATTANSTYLESHARED_EXPORT QString commonPrefix(const QStringList &strings)
 {
     switch (strings.size()) {
     case 0:
@@ -88,7 +88,7 @@ QTCREATOR_UTILS_EXPORT QString commonPrefix(const QStringList &strings)
     return strings.at(0).left(commonLength);
 }
 
-QTCREATOR_UTILS_EXPORT QString commonPath(const QStringList &files)
+QTMANHATTANSTYLESHARED_EXPORT QString commonPath(const QStringList &files)
 {
     QString common = commonPrefix(files);
     // Find common directory part: "C:\foo\bar" -> "C:\foo"
@@ -105,7 +105,7 @@ QTCREATOR_UTILS_EXPORT QString commonPath(const QStringList &files)
     return common;
 }
 
-QTCREATOR_UTILS_EXPORT QString withTildeHomePath(const QString &path)
+QTMANHATTANSTYLESHARED_EXPORT QString withTildeHomePath(const QString &path)
 {
 #ifdef Q_OS_WIN
     QString outPath = path;
@@ -143,7 +143,7 @@ int AbstractQtcMacroExpander::findMacro(const QString &str, int *pos, QString *r
     }
 }
 
-QTCREATOR_UTILS_EXPORT void expandMacros(QString *str, AbstractMacroExpander *mx)
+QTMANHATTANSTYLESHARED_EXPORT void expandMacros(QString *str, AbstractMacroExpander *mx)
 {
     QString rsts;
 
@@ -153,7 +153,7 @@ QTCREATOR_UTILS_EXPORT void expandMacros(QString *str, AbstractMacroExpander *mx
     }
 }
 
-QTCREATOR_UTILS_EXPORT QString expandMacros(const QString &str, AbstractMacroExpander *mx)
+QTMANHATTANSTYLESHARED_EXPORT QString expandMacros(const QString &str, AbstractMacroExpander *mx)
 {
     QString ret = str;
     expandMacros(&ret, mx);

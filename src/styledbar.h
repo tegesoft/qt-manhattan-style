@@ -33,13 +33,13 @@
 #ifndef STYLEDBAR_H
 #define STYLEDBAR_H
 
-#include "utils_global.h"
+#include "qt-manhattan-style_global.hpp"
 
 #include <QtGui/QWidget>
 
 namespace Utils {
 
-class QTCREATOR_UTILS_EXPORT StyledBar : public QWidget
+class QTMANHATTANSTYLESHARED_EXPORT StyledBar : public QWidget
 {
     Q_OBJECT
 public:
@@ -54,7 +54,7 @@ protected:
     void paintEvent(QPaintEvent *event);
 };
 
-class QTCREATOR_UTILS_EXPORT StyledSeparator : public QWidget
+class QTMANHATTANSTYLESHARED_EXPORT StyledSeparator : public QWidget
 {
     Q_OBJECT
 public:

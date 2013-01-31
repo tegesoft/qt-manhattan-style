@@ -33,7 +33,7 @@
 #ifndef FANCYMAINWINDOW_H
 #define FANCYMAINWINDOW_H
 
-#include "utils_global.h"
+#include "qt-manhattan-style_global.hpp"
 
 #include <QtGui/QMainWindow>
 
@@ -45,7 +45,7 @@ namespace Utils {
 
 struct FancyMainWindowPrivate;
 
-class QTCREATOR_UTILS_EXPORT FancyMainWindow : public QMainWindow
+class QTMANHATTANSTYLESHARED_EXPORT FancyMainWindow : public QMainWindow
 {
     Q_OBJECT
 

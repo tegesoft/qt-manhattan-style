@@ -33,7 +33,7 @@
 #ifndef HISTORYCOMPLETER_H
 #define HISTORYCOMPLETER_H
 
-#include "utils_global.h"
+#include "qt-manhattan-style_global.hpp"
 
 #include <QtGui/QCompleter>
 
@@ -43,7 +43,7 @@ namespace Utils {
 
 class HistoryCompleterPrivate;
 
-class QTCREATOR_UTILS_EXPORT HistoryCompleter : public QCompleter
+class QTMANHATTANSTYLESHARED_EXPORT HistoryCompleter : public QCompleter
 {
     Q_OBJECT
 

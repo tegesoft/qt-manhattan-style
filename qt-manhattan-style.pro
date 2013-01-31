@@ -43,7 +43,6 @@ HEADERS +=\
     src/doubletabwidget.h \
     src/coreconstants.h \
     src/core_global.h \
-    src/utils_global.h \
     src/qt-manhattan-style_global.hpp
 
 unix:!symbian {
