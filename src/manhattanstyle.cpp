@@ -38,7 +38,7 @@
 
 #include "coreconstants.h"
 
-#include <utils/qtcassert.h>
+#include "qtcassert.h"
 #include "stylehelper.h"
 
 #include <utils/fancymainwindow.h>
