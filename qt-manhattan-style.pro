@@ -42,7 +42,6 @@ HEADERS +=\
     src/fancyactionbar.h \
     src/doubletabwidget.h \
     src/coreconstants.h \
-    src/core_global.h \
     src/qt-manhattan-style_global.hpp
 
 unix:!symbian {
