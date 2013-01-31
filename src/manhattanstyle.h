@@ -33,13 +33,13 @@
 #ifndef MANHATTANSTYLE_H
 #define MANHATTANSTYLE_H
 
-#include "core_global.h"
+#include "qt-manhattan-style_global.hpp"
 
 #include <QtGui/QProxyStyle>
 
 class ManhattanStylePrivate;
 
-class CORE_EXPORT ManhattanStyle : public QProxyStyle
+class QTMANHATTANSTYLESHARED_EXPORT ManhattanStyle : public QProxyStyle
 {
     Q_OBJECT
 

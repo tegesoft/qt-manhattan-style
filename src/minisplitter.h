@@ -33,7 +33,7 @@
 #ifndef MINISPLITTER_H
 #define MINISPLITTER_H
 
-#include "core_global.h"
+#include "qt-manhattan-style_global.hpp"
 
 #include <QtGui/QSplitter>
 
@@ -44,7 +44,7 @@ QT_END_NAMESPACE
 namespace Core {
 
 /*! This is a simple helper-class to obtain mac-style 1-pixel wide splitters */
-class CORE_EXPORT MiniSplitter : public QSplitter
+class QTMANHATTANSTYLESHARED_EXPORT MiniSplitter : public QSplitter
 {
 public:
     MiniSplitter(QWidget *parent = 0);
