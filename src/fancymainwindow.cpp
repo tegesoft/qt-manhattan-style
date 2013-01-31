@@ -45,9 +45,9 @@ static const char stateKeyC[] = "State";
 static const int settingsVersion = 2;
 static const char dockWidgetActiveState[] = "DockWidgetActiveState";
 
-namespace Utils {
+namespace Manhattan {
 
-/*! \class Utils::FancyMainWindow
+/*! \class Manhattan::FancyMainWindow
 
     \brief MainWindow with dock widgets and additional "lock" functionality
     (locking the dock widgets in place) and "reset layout" functionality.
@@ -333,4 +333,4 @@ void FancyMainWindow::setToolBarDockWidget(QDockWidget *dock)
     d->m_toolBarDockWidget = dock;
 }
 
-} // namespace Utils
+} // namespace Manhattan

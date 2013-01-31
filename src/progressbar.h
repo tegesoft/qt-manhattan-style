@@ -33,8 +33,7 @@
 #include <QString>
 #include <QWidget>
 
-namespace Core {
-namespace Internal {
+namespace Manhattan {
 
 class ProgressBar : public QWidget
 {
@@ -84,7 +83,6 @@ private:
     bool m_finished;
 };
 
-} // namespace Internal
-} // namespace Core
+} // namespace Manhattan
 
 #endif // PROGRESSPIE_H

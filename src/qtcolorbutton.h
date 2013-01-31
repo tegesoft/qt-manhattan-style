@@ -34,7 +34,7 @@
 
 #include <QToolButton>
 
-namespace Utils {
+namespace Manhattan {
 
 class QTMANHATTANSTYLESHARED_EXPORT QtColorButton : public QToolButton
 {
@@ -73,6 +73,6 @@ private:
     friend class QtColorButtonPrivate;
 };
 
-} // namespace Utils
+} // namespace Manhattan
 
 #endif // QTCOLORBUTTON_H

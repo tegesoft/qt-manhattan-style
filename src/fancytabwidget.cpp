@@ -47,8 +47,7 @@
 #include <QAnimationGroup>
 #include <QPropertyAnimation>
 
-using namespace Core;
-using namespace Internal;
+using namespace Manhattan;
 
 const int FancyTabBar::m_rounding = 22;
 const int FancyTabBar::m_textPadding = 4;
@@ -386,7 +385,7 @@ FancyTabWidget::FancyTabWidget(QWidget *parent)
     selectionLayout->setSpacing(0);
     selectionLayout->setMargin(0);
 
-    Utils::StyledBar *bar = new Utils::StyledBar;
+    StyledBar *bar = new StyledBar;
     QHBoxLayout *layout = new QHBoxLayout(bar);
     layout->setMargin(0);
     layout->setSpacing(0);

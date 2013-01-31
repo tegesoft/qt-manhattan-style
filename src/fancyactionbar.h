@@ -36,8 +36,7 @@ QT_BEGIN_NAMESPACE
 class QVBoxLayout;
 QT_END_NAMESPACE
 
-namespace Core {
-namespace Internal {
+namespace Manhattan {
 
 class FancyToolButton : public QToolButton
 {
@@ -83,7 +82,6 @@ private:
     QVBoxLayout *m_actionsLayout;
 };
 
-} // namespace Internal
-} // namespace Core
+} // namespace Manhattan
 
 #endif // FANCYACTIONBAR_H

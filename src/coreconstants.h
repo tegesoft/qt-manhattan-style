@@ -32,7 +32,7 @@
 
 #include <QtGlobal>
 
-namespace Core {
+namespace Manhattan {
 namespace Constants {
 
 // Modes
@@ -229,7 +229,7 @@ const char TR_CLEAR_MENU[]         = QT_TRANSLATE_NOOP("Core", "Clear Menu");
 
 const int TARGET_ICON_SIZE = 32;
 
-} // namespace Constants
+} // namespace Manhattan
 } // namespace Core
 
 #endif // CORECONSTANTS_H

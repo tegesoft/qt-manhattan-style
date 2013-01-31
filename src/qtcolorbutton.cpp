@@ -37,7 +37,7 @@
 #include <QPainter>
 #include <QDrag>
 
-namespace Utils {
+namespace Manhattan {
 
 void QtColorButtonPrivate::slotEditColor()
 {
@@ -264,5 +264,5 @@ void QtColorButton::dropEvent(QDropEvent *event)
 }
 #endif
 
-} // namespace Utils
+} // namespace Manhattan
 

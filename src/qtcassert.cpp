@@ -29,7 +29,7 @@
 
 #include "qtcassert.h"
 
-namespace Utils {
+namespace Manhattan {
 
 void writeAssertLocation(const char *msg)
 {

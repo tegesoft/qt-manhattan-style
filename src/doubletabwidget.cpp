@@ -41,7 +41,7 @@
 
 #include <QDebug>
 
-using namespace ProjectExplorer::Internal;
+using namespace Manhattan;
 
 static const int MIN_LEFT_MARGIN = 50;
 static const int MARGIN = 12;

@@ -38,7 +38,7 @@ QT_BEGIN_NAMESPACE
 class QSettings;
 QT_END_NAMESPACE
 
-namespace Utils {
+namespace Manhattan {
 
 struct FancyMainWindowPrivate;
 
@@ -101,6 +101,6 @@ private:
     FancyMainWindowPrivate *d;
 };
 
-} // namespace Utils
+} // namespace Manhattan
 
 #endif // FANCYMAINWINDOW_H

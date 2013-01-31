@@ -36,7 +36,7 @@ QT_BEGIN_NAMESPACE
 class QStringList;
 QT_END_NAMESPACE
 
-namespace Utils {
+namespace Manhattan {
 
 // Create a usable settings key from a category,
 // for example Editor|C++ -> Editor_C__
@@ -80,6 +80,6 @@ public:
 QTMANHATTANSTYLESHARED_EXPORT void expandMacros(QString *str, AbstractMacroExpander *mx);
 QTMANHATTANSTYLESHARED_EXPORT QString expandMacros(const QString &str, AbstractMacroExpander *mx);
 
-} // namespace Utils
+} // namespace Manhattan
 
 #endif // SETTINGSTUTILS_H

@@ -44,8 +44,7 @@ class QStackedLayout;
 class QStatusBar;
 QT_END_NAMESPACE
 
-namespace Core {
-namespace Internal {
+namespace Manhattan {
 
 class QTMANHATTANSTYLESHARED_EXPORT FancyTab : public QObject
 {
@@ -180,7 +179,6 @@ private:
     QStatusBar *m_statusBar;
 };
 
-} // namespace Internal
-} // namespace Core
+} // namespace Manhattan
 
 #endif // FANCYTABWIDGET_H

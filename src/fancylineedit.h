@@ -35,7 +35,7 @@
 #include <QLineEdit>
 #include <QAbstractButton>
 
-namespace Utils {
+namespace Manhattan {
 
 class FancyLineEditPrivate;
 
@@ -100,7 +100,7 @@ public:
     void setSpecialCompleter(QCompleter *completer);
 
 signals:
-    void buttonClicked(Utils::FancyLineEdit::Side side);
+    void buttonClicked(Manhattan::FancyLineEdit::Side side);
     void leftButtonClicked();
     void rightButtonClicked();
 
@@ -118,12 +118,12 @@ private:
 
     void updateMargins();
     void updateButtonPositions();
-    friend class Utils::FancyLineEditPrivate;
+    friend class Manhattan::FancyLineEditPrivate;
 
     FancyLineEditPrivate *d;
     QString m_oldText;
 };
 
-} // namespace Utils
+} // namespace Manhattan
 
 #endif // FANCYLINEEDIT_H

@@ -32,11 +32,11 @@
 
 #include "qt-manhattan-style_global.hpp"
 
-namespace Utils { QTMANHATTANSTYLESHARED_EXPORT void writeAssertLocation(const char *msg); }
+namespace Manhattan { QTMANHATTANSTYLESHARED_EXPORT void writeAssertLocation(const char *msg); }
 
 #define QTC_ASSERT_STRINGIFY_HELPER(x) #x
 #define QTC_ASSERT_STRINGIFY(x) QTC_ASSERT_STRINGIFY_HELPER(x)
-#define QTC_ASSERT_STRING(cond) ::Utils::writeAssertLocation(\
+#define QTC_ASSERT_STRING(cond) ::Manhattan::writeAssertLocation(\
     "\"" cond"\" in file " __FILE__ ", line " QTC_ASSERT_STRINGIFY(__LINE__))
 
 // The 'do {...} while (0)' idiom is not used for the main block here to be

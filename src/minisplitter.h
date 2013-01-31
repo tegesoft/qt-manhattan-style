@@ -38,7 +38,7 @@ QT_BEGIN_NAMESPACE
 class QSplitterHandle;
 QT_END_NAMESPACE
 
-namespace Core {
+namespace Manhattan {
 
 /*! This is a simple helper-class to obtain mac-style 1-pixel wide splitters */
 class QTMANHATTANSTYLESHARED_EXPORT MiniSplitter : public QSplitter
@@ -51,6 +51,6 @@ protected:
     QSplitterHandle *createHandle();
 };
 
-} // namespace Core
+} // namespace Manhattan
 
 #endif // MINISPLITTER_H

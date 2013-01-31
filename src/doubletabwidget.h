@@ -34,8 +34,7 @@
 #include <QWidget>
 #include <QPixmap>
 
-namespace ProjectExplorer {
-namespace Internal {
+namespace Manhattan {
 
 namespace Ui {
     class DoubleTabWidget;
@@ -102,7 +101,6 @@ private:
     int m_lastVisibleIndex;
 };
 
-} // namespace Internal
-} // namespace ProjectExplorer
+} // namespace Manhattan
 
 #endif // DOUBLETABWIDGET_H

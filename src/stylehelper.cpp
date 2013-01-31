@@ -54,6 +54,7 @@ static int range(float x, int min, int max)
 }
 */
 
+namespace Manhattan {
 namespace Utils {
 
 QColor StyleHelper::mergedColors(const QColor &colorA, const QColor &colorB, int factor)
@@ -504,3 +505,4 @@ void StyleHelper::tintImage(QImage &img, const QColor &tintColor)
 
 
 } // namespace Utils
+} // namespace Manhattan

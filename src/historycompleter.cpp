@@ -41,8 +41,7 @@
 #include <QPainter>
 #include <QStyle>
 
-namespace Utils {
-namespace Internal {
+namespace Manhattan {
 
 static QSettings *theSettings = 0;
 
@@ -108,10 +107,6 @@ private:
     HistoryCompleterPrivate *model;
     int pixmapWidth;
 };
-
-} // namespace Internal
-
-using namespace Internal;
 
 int HistoryCompleterPrivate::rowCount(const QModelIndex &parent) const
 {
@@ -220,7 +215,7 @@ void HistoryCompleter::saveHistory()
 
 void HistoryCompleter::setSettings(QSettings *settings)
 {
-    Internal::theSettings = settings;
+    theSettings = settings;
 }
 
-} // namespace Utils
+} // namespace Manhattan

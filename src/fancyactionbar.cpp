@@ -49,8 +49,7 @@
 #include <QPropertyAnimation>
 #include <QDebug>
 
-using namespace Core;
-using namespace Internal;
+using namespace Manhattan;
 
 FancyToolButton::FancyToolButton(QWidget *parent)
     : QToolButton(parent), m_fader(0)
@@ -118,7 +117,7 @@ static QVector<QString> splitInTwoLines(const QString &text, const QFontMetrics 
     if (splitPos < 0) {
         splitLines[0] = fontMetrics.elidedText(text, Qt::ElideRight,
                                                        availableWidth);
-        QString common = Utils::commonPrefix(QStringList()
+        QString common = Manhattan::commonPrefix(QStringList()
                                              << splitLines[0] << text);
         splitLines[1] = text.mid(common.length());
         // elide the second line even if it fits, since it is cut off in mid-word
@@ -177,7 +176,7 @@ void FancyToolButton::paintEvent(QPaintEvent *event)
     QPixmap borderPixmap;
     QMargins margins;
 
-    QRect iconRect(0, 0, Core::Constants::TARGET_ICON_SIZE, Core::Constants::TARGET_ICON_SIZE);
+    QRect iconRect(0, 0, Manhattan::Constants::TARGET_ICON_SIZE, Manhattan::Constants::TARGET_ICON_SIZE);
     // draw popup texts
     if (isTitledAction) {
 

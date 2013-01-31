@@ -39,8 +39,9 @@ class QLineEdit;
 class QSettings;
 QT_END_NAMESPACE
 
-namespace Utils {
-namespace Internal { class HistoryCompleterPrivate; }
+namespace Manhattan {
+
+class HistoryCompleterPrivate;
 
 class QTMANHATTANSTYLESHARED_EXPORT HistoryCompleter : public QCompleter
 {
@@ -62,9 +63,9 @@ public Q_SLOTS:
     void saveHistory();
 
 private:
-    Internal::HistoryCompleterPrivate *d;
+    HistoryCompleterPrivate *d;
 };
 
-} // namespace Utils
+} // namespace Manhattan
 
 #endif // HISTORYCOMPLETER_H

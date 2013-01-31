@@ -95,7 +95,7 @@ enum { margin = 6 };
 #define ICONBUTTON_HEIGHT 18
 #define FADE_TIME 160
 
-namespace Utils {
+namespace Manhattan {
 
 // --------- FancyLineEditPrivate
 class FancyLineEditPrivate : public QObject
@@ -369,4 +369,4 @@ void IconButton::animateShow(bool visible)
     }
 }
 
-} // namespace Utils
+} // namespace Manhattan

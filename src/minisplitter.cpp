@@ -35,8 +35,7 @@
 #include <QPainter>
 #include <QSplitterHandle>
 
-namespace Core {
-namespace Internal {
+using namespace Manhattan;
 
 class MiniSplitterHandle : public QSplitterHandle
 {
@@ -51,12 +50,6 @@ protected:
     void resizeEvent(QResizeEvent *event);
     void paintEvent(QPaintEvent *event);
 };
-
-} // namespace Internal
-} // namespace Core
-
-using namespace Core;
-using namespace Core::Internal;
 
 void MiniSplitterHandle::resizeEvent(QResizeEvent *event)
 {

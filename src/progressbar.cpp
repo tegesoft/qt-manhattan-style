@@ -38,8 +38,7 @@
 #include <QColor>
 #include <QMouseEvent>
 
-using namespace Core;
-using namespace Core::Internal;
+using namespace Manhattan;
 
 #define PROGRESSBAR_HEIGHT 12
 #define CANCELBUTTON_SIZE 15

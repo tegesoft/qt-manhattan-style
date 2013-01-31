@@ -36,7 +36,7 @@
 
 #include <limits.h>
 
-namespace Utils {
+namespace Manhattan {
 
 QTMANHATTANSTYLESHARED_EXPORT QString settingsKey(const QString &category)
 {
@@ -157,4 +157,4 @@ QTMANHATTANSTYLESHARED_EXPORT QString expandMacros(const QString &str, AbstractM
     return ret;
 }
 
-} // namespace Utils
+} // namespace Manhattan

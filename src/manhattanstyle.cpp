@@ -61,6 +61,8 @@
 #include <QToolButton>
 #include <QAbstractItemView>
 
+using namespace Manhattan;
+
 // We define a currently unused state for indicating animations
 const QStyle::State State_Animating = QStyle::State(0x00000040);
 
@@ -87,7 +89,7 @@ bool panelWidget(const QWidget *widget)
     if ((widget->window()->windowFlags() & Qt::WindowType_Mask) == Qt::Dialog)
         return false;
 
-    if (qobject_cast<const Utils::FancyMainWindow *>(widget))
+    if (qobject_cast<const Manhattan::FancyMainWindow *>(widget))
         return true;
 
     if (qobject_cast<const QTabBar *>(widget))
@@ -142,7 +144,7 @@ ManhattanStylePrivate::ManhattanStylePrivate() :
     lineeditImage(QLatin1String(":/core/images/inputfield.png")),
     lineeditImage_disabled(QLatin1String(":/core/images/inputfield_disabled.png")),
     extButtonPixmap(QLatin1String(":/core/images/extension.png")),
-    closeButtonPixmap(QLatin1String(Core::Constants::ICON_CLOSE))
+    closeButtonPixmap(QLatin1String(Manhattan::Constants::ICON_CLOSE))
 {
 }
 

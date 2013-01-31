@@ -34,7 +34,7 @@
 
 #include <QWidget>
 
-namespace Utils {
+namespace Manhattan {
 
 class QTMANHATTANSTYLESHARED_EXPORT StyledBar : public QWidget
 {
@@ -60,6 +60,6 @@ protected:
     void paintEvent(QPaintEvent *event);
 };
 
-} // Utils
+} // Manhattan
 
 #endif // STYLEDBAR_H

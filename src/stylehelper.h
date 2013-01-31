@@ -46,6 +46,7 @@ QT_END_NAMESPACE
 
 // Helper class holding all custom color values
 
+namespace Manhattan {
 namespace Utils {
 class QTMANHATTANSTYLESHARED_EXPORT StyleHelper
 {
@@ -96,4 +97,5 @@ private:
 };
 
 } // namespace Utils
+} // namespace Manhattan
 #endif // STYLEHELPER_H

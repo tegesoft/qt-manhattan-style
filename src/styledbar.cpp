@@ -37,7 +37,7 @@
 #include <QStyle>
 #include <QStyleOption>
 
-using namespace Utils;
+using namespace Manhattan;
 
 StyledBar::StyledBar(QWidget *parent)
     : QWidget(parent)

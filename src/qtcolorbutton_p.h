@@ -1,6 +1,6 @@
 #include "qtcolorbutton.h"
 
-namespace Utils {
+namespace Manhattan {
 
 class QtColorButtonPrivate: public QObject
 {
