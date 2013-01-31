@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ProjectExplorer::Internal::DoubleTabWidget</class>
- <widget class="QWidget" name="ProjectExplorer::Internal::DoubleTabWidget">
+ <class>Manhattan::DoubleTabWidget</class>
+ <widget class="QWidget" name="Manhattan::DoubleTabWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
