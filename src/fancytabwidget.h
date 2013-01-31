@@ -33,6 +33,8 @@
 #ifndef FANCYTABWIDGET_H
 #define FANCYTABWIDGET_H
 
+#include "qt-manhattan-style_global.hpp"
+
 #include <QtGui/QIcon>
 #include <QtGui/QWidget>
 
@@ -48,7 +50,7 @@ QT_END_NAMESPACE
 namespace Core {
 namespace Internal {
 
-class FancyTab : public QObject
+class QTMANHATTANSTYLESHARED_EXPORT FancyTab : public QObject
 {
     Q_OBJECT
 
@@ -139,7 +141,7 @@ private:
 
 };
 
-class FancyTabWidget : public QWidget
+class QTMANHATTANSTYLESHARED_EXPORT FancyTabWidget : public QWidget
 {
     Q_OBJECT
 
