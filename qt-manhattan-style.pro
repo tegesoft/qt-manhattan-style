@@ -53,3 +53,6 @@ unix:!symbian {
     }
     INSTALLS += target
 }
+
+FORMS += \
+    src/doubletabwidget.ui
