@@ -1,54 +1,53 @@
-/**************************************************************************
+/****************************************************************************
 **
-** This file is part of Qt Creator
+** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+** Contact: http://www.qt-project.org/legal
 **
-** Copyright (c) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** This file is part of Qt Creator.
 **
-** Contact: Nokia Corporation (qt-info@nokia.com)
-**
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and Digia.  For licensing terms and
+** conditions see http://qt.digia.com/licensing.  For further information
+** use the contact form at http://qt.digia.com/contact-us.
 **
 ** GNU Lesser General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU Lesser
+** General Public License version 2.1 as published by the Free Software
+** Foundation and appearing in the file LICENSE.LGPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU Lesser General Public License version 2.1 requirements
+** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
 **
-** This file may be used under the terms of the GNU Lesser General Public
-** License version 2.1 as published by the Free Software Foundation and
-** appearing in the file LICENSE.LGPL included in the packaging of this file.
-** Please review the following information to ensure the GNU Lesser General
-** Public License version 2.1 requirements will be met:
-** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-**
-** In addition, as a special exception, Nokia gives you certain additional
-** rights. These rights are described in the Nokia Qt LGPL Exception
+** In addition, as a special exception, Digia gives you certain additional
+** rights.  These rights are described in the Digia Qt LGPL Exception
 ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
 **
-** Other Usage
-**
-** Alternatively, this file may be used in accordance with the terms and
-** conditions contained in a signed written agreement between you and Nokia.
-**
-** If you have questions regarding the use of this file, please contact
-** Nokia at qt-info@nokia.com.
-**
-**************************************************************************/
+****************************************************************************/
 
 #include "fancyactionbar.h"
 #include "coreconstants.h"
 
 #include "stylehelper.h"
+#include "stringutils.h"
 
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QPainter>
-#include <QtGui/QPicture>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QAction>
-#include <QtGui/QStatusBar>
-#include <QtGui/QStyle>
-#include <QtGui/QStyleOption>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QApplication>
-#include <QtCore/QEvent>
-#include <QtCore/QAnimationGroup>
-#include <QtCore/QPropertyAnimation>
-#include <QtCore/QDebug>
+
+#include <QHBoxLayout>
+#include <QPainter>
+#include <QPicture>
+#include <QVBoxLayout>
+#include <QAction>
+#include <QStatusBar>
+#include <QStyle>
+#include <QStyleOption>
+#include <QMouseEvent>
+#include <QApplication>
+#include <QEvent>
+#include <QAnimationGroup>
+#include <QPropertyAnimation>
+#include <QDebug>
 
 using namespace Core;
 using namespace Internal;
@@ -92,6 +91,50 @@ bool FancyToolButton::event(QEvent *e)
     return false;
 }
 
+static QVector<QString> splitInTwoLines(const QString &text, const QFontMetrics &fontMetrics,
+                                        qreal availableWidth)
+{
+    // split in two lines.
+    // this looks if full words can be split off at the end of the string,
+    // to put them in the second line. First line is drawn with ellipsis,
+    // second line gets ellipsis if it couldn't split off full words.
+    QVector<QString> splitLines(2);
+    QRegExp rx(QLatin1String("\\s+"));
+    int splitPos = -1;
+    int nextSplitPos = text.length();
+    do {
+        nextSplitPos = rx.lastIndexIn(text,
+                                      nextSplitPos - text.length() - 1);
+        if (nextSplitPos != -1) {
+            int splitCandidate = nextSplitPos + rx.matchedLength();
+            if (fontMetrics.width(text.mid(splitCandidate)) <= availableWidth) {
+                splitPos = splitCandidate;
+            } else {
+                break;
+            }
+        }
+    } while (nextSplitPos > 0 && fontMetrics.width(text.left(nextSplitPos)) > availableWidth);
+    // check if we could split at white space at all
+    if (splitPos < 0) {
+        splitLines[0] = fontMetrics.elidedText(text, Qt::ElideRight,
+                                                       availableWidth);
+        QString common = Utils::commonPrefix(QStringList()
+                                             << splitLines[0] << text);
+        splitLines[1] = text.mid(common.length());
+        // elide the second line even if it fits, since it is cut off in mid-word
+        while (fontMetrics.width(QChar(0x2026) /*'...'*/ + splitLines[1]) > availableWidth
+               && splitLines[1].length() > 3
+               /*keep at least three original characters (should not happen)*/) {
+            splitLines[1].remove(0, 1);
+        }
+        splitLines[1] = QChar(0x2026) /*'...'*/ + splitLines[1];
+    } else {
+        splitLines[0] = fontMetrics.elidedText(text.left(splitPos).trimmed(), Qt::ElideRight, availableWidth);
+        splitLines[1] = text.mid(splitPos);
+    }
+    return splitLines;
+}
+
 void FancyToolButton::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
@@ -100,7 +143,7 @@ void FancyToolButton::paintEvent(QPaintEvent *event)
     // draw borders
     bool isTitledAction = defaultAction()->property("titledAction").toBool();
 
-#ifndef Q_WS_MAC // Mac UIs usually don't hover
+#ifndef Q_OS_MAC // Mac UIs usually don't hover
     if (m_fader > 0 && isEnabled() && !isDown() && !isChecked()) {
         painter.save();
         int fader = int(40 * m_fader);
@@ -152,9 +195,7 @@ void FancyToolButton::paintEvent(QPaintEvent *event)
         if (!projectName.isNull())
             centerRect.adjust(0, lineHeight + 4, 0, 0);
 
-        const QString buildConfiguration = defaultAction()->property("subtitle").toString();
-        if (!buildConfiguration.isNull())
-            centerRect.adjust(0, 0, 0, -lineHeight - 4);
+        centerRect.adjust(0, 0, 0, -lineHeight*2 - 4);
 
         iconRect.moveCenter(centerRect.center());
         Utils::StyleHelper::drawIconWithShadow(icon(), iconRect, &painter, isEnabled() ? QIcon::Normal : QIcon::Disabled);
@@ -170,8 +211,10 @@ void FancyToolButton::paintEvent(QPaintEvent *event)
             penColor = Qt::gray;
         painter.setPen(penColor);
 
+        // draw project name
         const int margin = 6;
-        QString ellidedProjectName = fm.elidedText(projectName, Qt::ElideMiddle, r.width() - margin);
+        const qreal availableWidth = r.width() - margin;
+        QString ellidedProjectName = fm.elidedText(projectName, Qt::ElideMiddle, availableWidth);
         if (isEnabled()) {
             const QRectF shadowR = r.translated(0, 1);
             painter.setPen(QColor(30, 30, 30, 80));
@@ -179,18 +222,36 @@ void FancyToolButton::paintEvent(QPaintEvent *event)
             painter.setPen(penColor);
         }
         painter.drawText(r, textFlags, ellidedProjectName);
+
+        // draw build configuration name
         textOffset = iconRect.center() + QPoint(iconRect.width()/2, iconRect.height()/2);
-        r = QRectF(0, textOffset.y()+5, rect().width(), lineHeight);
+        QRectF buildConfigRect[2];
+        buildConfigRect[0] = QRectF(0, textOffset.y() + 5, rect().width(), lineHeight);
+        buildConfigRect[1] = QRectF(0, textOffset.y() + 5 + lineHeight, rect().width(), lineHeight);
         painter.setFont(boldFont);
-        QString ellidedBuildConfiguration = boldFm.elidedText(buildConfiguration, Qt::ElideMiddle, r.width() - margin);
-        if (isEnabled()) {
-            const QRectF shadowR = r.translated(0, 1);
-            painter.setPen(QColor(30, 30, 30, 80));
-            painter.drawText(shadowR, textFlags, ellidedBuildConfiguration);
-            painter.setPen(penColor);
+        QVector<QString> splitBuildConfiguration(2);
+        const QString buildConfiguration = defaultAction()->property("subtitle").toString();
+        if (boldFm.width(buildConfiguration) <= availableWidth) {
+            // text fits in one line
+            splitBuildConfiguration[0] = buildConfiguration;
+        } else {
+            splitBuildConfiguration = splitInTwoLines(buildConfiguration, boldFm, availableWidth);
         }
+        // draw the two lines for the build configuration
+        for (int i = 0; i < 2; ++i) {
+            if (splitBuildConfiguration[i].isEmpty())
+                continue;
+            if (isEnabled()) {
+                const QRectF shadowR = buildConfigRect[i].translated(0, 1);
+                painter.setPen(QColor(30, 30, 30, 80));
+                painter.drawText(shadowR, textFlags, splitBuildConfiguration[i]);
+                painter.setPen(penColor);
+            }
+            painter.drawText(buildConfigRect[i], textFlags, splitBuildConfiguration[i]);
+        }
+
+        // pop up arrow next to icon
         if (!icon().isNull()) {
-            painter.drawText(r, textFlags, ellidedBuildConfiguration);
             QStyleOption opt;
             opt.initFrom(this);
             opt.rect = rect().adjusted(rect().width() - 16, 0, -8, 0);
@@ -228,9 +289,7 @@ QSize FancyToolButton::sizeHint() const
         if (!projectName.isEmpty())
             buttonSize += QSizeF(0, lineHeight + 2);
 
-        const QString buildConfiguration = defaultAction()->property("subtitle").toString();
-        if (!buildConfiguration.isEmpty())
-            buttonSize += QSizeF(0, lineHeight + 2);
+        buttonSize += QSizeF(0, lineHeight*2 + 2);
     }
     return buttonSize.toSize();
 }
@@ -253,7 +312,7 @@ void FancyToolButton::actionChanged()
 FancyActionBar::FancyActionBar(QWidget *parent)
     : QWidget(parent)
 {
-    setObjectName(QString::fromUtf8("actionbar"));
+    setObjectName(QLatin1String("actionbar"));
     m_actionsLayout = new QVBoxLayout;
     QVBoxLayout *spacerLayout = new QVBoxLayout;
     spacerLayout->addLayout(m_actionsLayout);

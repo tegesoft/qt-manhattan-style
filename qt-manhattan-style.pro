@@ -15,6 +15,7 @@ SOURCES += \
     src/styleanimator.cpp \
     src/stringutils.cpp \
     src/qtcolorbutton.cpp \
+    src/qtcassert.cpp \
     src/progressbar.cpp \
     src/minisplitter.cpp \
     src/manhattanstyle.cpp \

@@ -1,40 +1,37 @@
-/**************************************************************************
+/****************************************************************************
 **
-** This file is part of Qt Creator
+** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+** Contact: http://www.qt-project.org/legal
 **
-** Copyright (c) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** This file is part of Qt Creator.
 **
-** Contact: Nokia Corporation (qt-info@nokia.com)
-**
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and Digia.  For licensing terms and
+** conditions see http://qt.digia.com/licensing.  For further information
+** use the contact form at http://qt.digia.com/contact-us.
 **
 ** GNU Lesser General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU Lesser
+** General Public License version 2.1 as published by the Free Software
+** Foundation and appearing in the file LICENSE.LGPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU Lesser General Public License version 2.1 requirements
+** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
 **
-** This file may be used under the terms of the GNU Lesser General Public
-** License version 2.1 as published by the Free Software Foundation and
-** appearing in the file LICENSE.LGPL included in the packaging of this file.
-** Please review the following information to ensure the GNU Lesser General
-** Public License version 2.1 requirements will be met:
-** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-**
-** In addition, as a special exception, Nokia gives you certain additional
-** rights. These rights are described in the Nokia Qt LGPL Exception
+** In addition, as a special exception, Digia gives you certain additional
+** rights.  These rights are described in the Digia Qt LGPL Exception
 ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
 **
-** Other Usage
-**
-** Alternatively, this file may be used in accordance with the terms and
-** conditions contained in a signed written agreement between you and Nokia.
-**
-** If you have questions regarding the use of this file, please contact
-** Nokia at qt-info@nokia.com.
-**
-**************************************************************************/
+****************************************************************************/
 
 #include "manhattanstyle.h"
 
 #include "styleanimator.h"
 
-#include <QtCore/QLibrary>
+#include <QLibrary>
 
 #include "coreconstants.h"
 
@@ -43,30 +40,29 @@
 
 #include "fancymainwindow.h"
 
-#include <QtGui/QApplication>
-#include <QtGui/QComboBox>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QDockWidget>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenuBar>
-#include <QtGui/QPainter>
-#include <QtGui/QPixmap>
-#include <QtGui/QPixmapCache>
-#include <QtGui/QPushButton>
-#include <QtGui/QScrollArea>
-#include <QtGui/QSplitter>
-#include <QtGui/QStatusBar>
-#include <QtGui/QStyleFactory>
-#include <QtGui/QStyleOption>
-#include <QtGui/QToolBar>
-#include <QtGui/QTreeView>
-#include <QtGui/QToolButton>
-#include <QtGui/QAbstractItemView>
+#include <QApplication>
+#include <QComboBox>
+#include <QDialogButtonBox>
+#include <QDockWidget>
+#include <QLabel>
+#include <QLineEdit>
+#include <QMenuBar>
+#include <QPainter>
+#include <QPixmap>
+#include <QPixmapCache>
+#include <QPushButton>
+#include <QScrollArea>
+#include <QSplitter>
+#include <QStatusBar>
+#include <QStyleFactory>
+#include <QStyleOption>
+#include <QToolBar>
+#include <QTreeView>
+#include <QToolButton>
+#include <QAbstractItemView>
 
 // We define a currently unused state for indicating animations
-#define State_Animating 0x00000040
+const QStyle::State State_Animating = QStyle::State(0x00000040);
 
 // Because designer needs to disable this for widget previews
 // we have a custom property that is inherited
@@ -415,7 +411,7 @@ void ManhattanStyle::drawPrimitive(PrimitiveElement element, const QStyleOption 
             Animation *anim = d->animator.widgetAnimation(widget);
             QStyleOption opt = *option;
             opt.state = (QStyle::State)oldState;
-            opt.state |= (State)State_Animating;
+            opt.state |= State_Animating;
             startImage.fill(0);
             Transition *t = new Transition;
             t->setWidget(w);
@@ -427,7 +423,7 @@ void ManhattanStyle::drawPrimitive(PrimitiveElement element, const QStyleOption 
                 d->animator.stopAnimation(widget);
             }
             QStyleOption endOpt = *option;
-            endOpt.state |= (State)State_Animating;
+            endOpt.state |= State_Animating;
             t->setStartImage(startImage);
             d->animator.startAnimation(t);
             endImage.fill(0);
@@ -650,7 +646,7 @@ void ManhattanStyle::drawControl(ControlElement element, const QStyleOption *opt
         painter->save();
         if (const QStyleOptionMenuItem *mbi = qstyleoption_cast<const QStyleOptionMenuItem *>(option)) {
             QColor highlightOutline = Utils::StyleHelper::borderColor().lighter(120);
-            bool act = mbi->state & State_Selected && mbi->state & State_Sunken;
+            bool act = mbi->state & State_Sunken;
             bool dis = !(mbi->state & State_Enabled);
             Utils::StyleHelper::menuGradient(painter, option->rect, option->rect);
             QStyleOptionMenuItem item = *mbi;
@@ -698,8 +694,9 @@ void ManhattanStyle::drawControl(ControlElement element, const QStyleOption *opt
                 painter->save();
                 QRect editRect = subControlRect(CC_ComboBox, cb, SC_ComboBoxEditField, widget);
                 QPalette customPal = cb->palette;
+                bool drawIcon = !(widget && widget->property("hideicon").toBool());
 
-                if (!cb->currentIcon.isNull()) {
+                if (!cb->currentIcon.isNull() && drawIcon) {
                     QIcon::Mode mode = cb->state & State_Enabled ? QIcon::Normal
                                                                  : QIcon::Disabled;
                     QPixmap pixmap = cb->currentIcon.pixmap(cb->iconSize, mode);
@@ -843,6 +840,12 @@ void ManhattanStyle::drawComplexControl(ComplexControl control, const QStyleOpti
     switch (control) {
     case CC_ToolButton:
         if (const QStyleOptionToolButton *toolbutton = qstyleoption_cast<const QStyleOptionToolButton *>(option)) {
+            bool reverse = option->direction == Qt::RightToLeft;
+            bool drawborder = (widget && widget->property("showborder").toBool());
+
+            if (drawborder)
+                drawButtonSeparator(painter, rect, reverse);
+
             QRect button, menuarea;
             button = subControlRect(control, toolbutton, SC_ToolButton, widget);
             menuarea = subControlRect(control, toolbutton, SC_ToolButtonMenu, widget);
@@ -888,7 +891,7 @@ void ManhattanStyle::drawComplexControl(ComplexControl control, const QStyleOpti
                         QColor shade(0, 0, 0, 50);
                         painter->fillRect(tool.rect.adjusted(0, -1, 1, 1), shade);
                     }
-#ifndef Q_WS_MAC
+#ifndef Q_OS_MAC
                     else if (mflags & (State_MouseOver)) {
                         QColor shade(255, 255, 255, 50);
                         painter->fillRect(tool.rect.adjusted(0, -1, 1, 1), shade);
@@ -918,25 +921,9 @@ void ManhattanStyle::drawComplexControl(ComplexControl control, const QStyleOpti
             bool drawborder = !(widget && widget->property("hideborder").toBool());
             bool alignarrow = !(widget && widget->property("alignarrow").toBool());
 
-            // Draw tool button
-            if (drawborder) {
-                QLinearGradient grad(option->rect.topRight(), option->rect.bottomRight());
-                grad.setColorAt(0, QColor(255, 255, 255, 20));
-                grad.setColorAt(0.4, QColor(255, 255, 255, 60));
-                grad.setColorAt(0.7, QColor(255, 255, 255, 50));
-                grad.setColorAt(1, QColor(255, 255, 255, 40));
-                painter->setPen(QPen(grad, 0));
-                painter->drawLine(rect.topRight(), rect.bottomRight());
-                grad.setColorAt(0, QColor(0, 0, 0, 30));
-                grad.setColorAt(0.4, QColor(0, 0, 0, 70));
-                grad.setColorAt(0.7, QColor(0, 0, 0, 70));
-                grad.setColorAt(1, QColor(0, 0, 0, 40));
-                painter->setPen(QPen(grad, 0));
-                if (!reverse)
-                    painter->drawLine(rect.topRight() - QPoint(1,0), rect.bottomRight() - QPoint(1,0));
-                else
-                    painter->drawLine(rect.topLeft(), rect.bottomLeft());
-            }
+            if (drawborder)
+                drawButtonSeparator(painter, rect, reverse);
+
             QStyleOption toolbutton = *option;
             if (isEmpty)
                 toolbutton.state &= ~(State_Enabled | State_Sunken);
@@ -985,3 +972,23 @@ void ManhattanStyle::drawComplexControl(ComplexControl control, const QStyleOpti
         break;
     }
 }
+
+void ManhattanStyle::drawButtonSeparator(QPainter *painter, const QRect &rect, bool reverse) const
+{
+    QLinearGradient grad(rect.topRight(), rect.bottomRight());
+    grad.setColorAt(0, QColor(255, 255, 255, 20));
+    grad.setColorAt(0.4, QColor(255, 255, 255, 60));
+    grad.setColorAt(0.7, QColor(255, 255, 255, 50));
+    grad.setColorAt(1, QColor(255, 255, 255, 40));
+    painter->setPen(QPen(grad, 0));
+    painter->drawLine(rect.topRight(), rect.bottomRight());
+    grad.setColorAt(0, QColor(0, 0, 0, 30));
+    grad.setColorAt(0.4, QColor(0, 0, 0, 70));
+    grad.setColorAt(0.7, QColor(0, 0, 0, 70));
+    grad.setColorAt(1, QColor(0, 0, 0, 40));
+    painter->setPen(QPen(grad, 0));
+    if (!reverse)
+       painter->drawLine(rect.topRight() - QPoint(1,0), rect.bottomRight() - QPoint(1,0));
+    else
+       painter->drawLine(rect.topLeft(), rect.bottomLeft());
+ }

@@ -27,44 +27,13 @@
 **
 ****************************************************************************/
 
-#ifndef HISTORYCOMPLETER_H
-#define HISTORYCOMPLETER_H
-
-#include "qt-manhattan-style_global.hpp"
-
-#include <QCompleter>
-
-QT_BEGIN_NAMESPACE
-class QLineEdit;
-class QSettings;
-QT_END_NAMESPACE
+#include "qtcassert.h"
 
 namespace Utils {
-namespace Internal { class HistoryCompleterPrivate; }
 
-class QTMANHATTANSTYLESHARED_EXPORT HistoryCompleter : public QCompleter
+void writeAssertLocation(const char *msg)
 {
-    Q_OBJECT
-
-public:
-    static void setSettings(QSettings *settings);
-    HistoryCompleter(QLineEdit *lineEdit, const QString &historyKey, QObject *parent = 0);
-
-private:
-    ~HistoryCompleter();
-    int historySize() const;
-    int maximalHistorySize() const;
-    void setMaximalHistorySize(int numberOfEntries);
-    bool eventFilter(QObject *obj, QEvent *event);
-
-public Q_SLOTS:
-    void clearHistory();
-    void saveHistory();
-
-private:
-    Internal::HistoryCompleterPrivate *d;
-};
+    qDebug("SOFT ASSERT: %s", msg);
+}
 
 } // namespace Utils
-
-#endif // HISTORYCOMPLETER_H

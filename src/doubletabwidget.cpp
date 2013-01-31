@@ -1,48 +1,45 @@
-/**************************************************************************
+/****************************************************************************
 **
-** This file is part of Qt Creator
+** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+** Contact: http://www.qt-project.org/legal
 **
-** Copyright (c) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** This file is part of Qt Creator.
 **
-** Contact: Nokia Corporation (qt-info@nokia.com)
-**
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and Digia.  For licensing terms and
+** conditions see http://qt.digia.com/licensing.  For further information
+** use the contact form at http://qt.digia.com/contact-us.
 **
 ** GNU Lesser General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU Lesser
+** General Public License version 2.1 as published by the Free Software
+** Foundation and appearing in the file LICENSE.LGPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU Lesser General Public License version 2.1 requirements
+** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
 **
-** This file may be used under the terms of the GNU Lesser General Public
-** License version 2.1 as published by the Free Software Foundation and
-** appearing in the file LICENSE.LGPL included in the packaging of this file.
-** Please review the following information to ensure the GNU Lesser General
-** Public License version 2.1 requirements will be met:
-** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-**
-** In addition, as a special exception, Nokia gives you certain additional
-** rights. These rights are described in the Nokia Qt LGPL Exception
+** In addition, as a special exception, Digia gives you certain additional
+** rights.  These rights are described in the Digia Qt LGPL Exception
 ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
 **
-** Other Usage
-**
-** Alternatively, this file may be used in accordance with the terms and
-** conditions contained in a signed written agreement between you and Nokia.
-**
-** If you have questions regarding the use of this file, please contact
-** Nokia at qt-info@nokia.com.
-**
-**************************************************************************/
+****************************************************************************/
 
 #include "doubletabwidget.h"
 #include "ui_doubletabwidget.h"
 
 #include "stylehelper.h"
 
-#include <QtCore/QRect>
-#include <QtGui/QPainter>
-#include <QtGui/QFont>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QMenu>
-#include <QtGui/QToolTip>
+#include <QRect>
+#include <QPainter>
+#include <QFont>
+#include <QMouseEvent>
+#include <QMenu>
+#include <QToolTip>
 
-#include <QtDebug>
+#include <QDebug>
 
 using namespace ProjectExplorer::Internal;
 
@@ -532,7 +529,7 @@ bool DoubleTabWidget::event(QEvent *event)
         if (hit.first == HITTAB && m_tabs.at(m_currentTabIndices.at(hit.second)).nameIsUnique)
             QToolTip::showText(helpevent->globalPos(), m_tabs.at(m_currentTabIndices.at(hit.second)).fullName, this);
         else
-            QToolTip::showText(helpevent->globalPos(), "", this);
+            QToolTip::showText(helpevent->globalPos(), QString(), this);
     }
     return QWidget::event(event);
 }
