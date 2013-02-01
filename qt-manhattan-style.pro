@@ -9,6 +9,8 @@ TEMPLATE = lib
 
 DEFINES += QTMANHATTANSTYLE_LIBRARY
 
+INCLUDEPATH += src
+
 SOURCES += \
     src/stylehelper.cpp \
     src/styledbar.cpp \
@@ -24,7 +26,8 @@ SOURCES += \
     src/fancymainwindow.cpp \
     src/fancylineedit.cpp \
     src/fancyactionbar.cpp \
-    src/doubletabwidget.cpp
+    src/doubletabwidget.cpp \
+    src/extensions/simpleprogressbar.cpp
 
 HEADERS +=\
     src/stylehelper.h \
@@ -44,7 +47,8 @@ HEADERS +=\
     src/fancyactionbar.h \
     src/doubletabwidget.h \
     src/coreconstants.h \
-    src/qt-manhattan-style_global.hpp
+    src/qt-manhattan-style_global.hpp \
+    src/extensions/simpleprogressbar.h
 
 unix:!symbian {
     maemo5 {
