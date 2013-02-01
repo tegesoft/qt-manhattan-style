@@ -98,6 +98,7 @@ QColor StyleHelper::panelTextColor(bool lightColored)
 // Invalid by default, setBaseColor needs to be called at least once
 QColor StyleHelper::m_baseColor;
 QColor StyleHelper::m_requestedBaseColor;
+int StyleHelper::m_navigationWidgetHeight = 24;
 
 QColor StyleHelper::baseColor(bool lightColored)
 {
@@ -501,6 +502,16 @@ void StyleHelper::tintImage(QImage &img, const QColor &tintColor)
             }
         }
     }
+}
+
+int StyleHelper::navigationWidgetHeight()
+{
+    return m_navigationWidgetHeight;
+}
+
+void StyleHelper::setNavigationWidgetHeight(int height)
+{
+    m_navigationWidgetHeight = height;
 }
 
 

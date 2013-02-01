@@ -30,12 +30,13 @@
 #ifndef PROGRESSPIE_H
 #define PROGRESSPIE_H
 
+#include "qt-manhattan-style_global.hpp"
 #include <QString>
 #include <QWidget>
 
 namespace Manhattan {
 
-class ProgressBar : public QWidget
+class QTMANHATTANSTYLESHARED_EXPORT ProgressBar : public QWidget
 {
     Q_OBJECT
 
