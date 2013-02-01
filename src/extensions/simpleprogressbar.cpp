@@ -7,17 +7,17 @@
 
 using namespace Manhattan;
 
-SimpleProgressBar::SimpleProgressBar(int height, QWidget *parent)
+SimpleProgressBar::SimpleProgressBar(int width, int height, QWidget *parent)
     : QWidget(parent)
     , m_error(false)
-    , m_progressHeight(((height % 2) + 1) % 2) // make odd
+    , m_progressWidth(width)
+    , m_progressHeight(height + ((height % 2) + 1) % 2) // make odd
     , m_minimum(1)
     , m_maximum(100)
     , m_value(1)
     , m_finished(false)
 {
-    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
-    setMouseTracking(true);
+    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 }
 
 SimpleProgressBar::~SimpleProgressBar()
@@ -72,7 +72,7 @@ void SimpleProgressBar::setError(bool on)
 QSize SimpleProgressBar::sizeHint() const
 {
     QSize s;
-    s.setWidth(50);
+    s.setWidth(m_progressWidth + 6);
     s.setHeight(m_progressHeight + 6);
     return s;
 }
@@ -97,7 +97,7 @@ void SimpleProgressBar::paintEvent(QPaintEvent *)
     QPainter p(this);
 
     // draw outer rect
-    QRect rect(0, (size().height() - m_progressHeight) / 2, size().width(), m_progressHeight-1);
+    QRect rect((size().width() - m_progressWidth) / 2, (size().height() - m_progressHeight) / 2, m_progressWidth, m_progressHeight-1);
     p.setPen(Utils::StyleHelper::panelTextColor());
     Utils::StyleHelper::drawCornerImage(bar, &p, rect, 2, 2, 2, 2);
 

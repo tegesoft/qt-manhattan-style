@@ -11,7 +11,7 @@ class QTMANHATTANSTYLESHARED_EXPORT SimpleProgressBar : public QWidget
     Q_OBJECT
 
 public:
-    explicit SimpleProgressBar(int height = 12, QWidget *parent = 0);
+    explicit SimpleProgressBar(int width = 50, int height = 12, QWidget *parent = 0);
     ~SimpleProgressBar();
 
     void setError(bool on);
@@ -32,6 +32,7 @@ private:
     QString m_text;
     bool m_error;
     int m_progressHeight;
+    int m_progressWidth;
     int m_minimum;
     int m_maximum;
     int m_value;

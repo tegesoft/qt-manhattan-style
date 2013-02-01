@@ -1,5 +1,7 @@
 project(qt-manhattan-style)
 
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/src)
+
 set(SRCS
     src/stylehelper.cpp
     src/styledbar.cpp
@@ -16,6 +18,7 @@ set(SRCS
     src/fancylineedit.cpp
     src/fancyactionbar.cpp
     src/doubletabwidget.cpp
+    src/extensions/simpleprogressbar.cpp
 )
 
 set(MOC_HDRS
@@ -37,6 +40,11 @@ set(MOC_HDRS
     src/doubletabwidget.h
     src/coreconstants.h
     src/qt-manhattan-style_global.hpp
+    src/extensions/simpleprogressbar.h
+)
+
+set(RCS
+    src/resources/resources.qrc
 )
 
 set(UI_FILES
@@ -58,9 +66,13 @@ source_group(moc FILES ${MOC_SRCS})
 QT4_WRAP_UI(UI_HDRS ${UI_FILES})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}) # UI headers are generated in the binary directory
 
+# this command will generate rules that will run rcc on all files from RCS
+# in result RC_SRCS variable will contain paths to files produced by rcc
+QT4_ADD_RESOURCES(RC_SRCS ${RCS})
+
 # Create the target
 add_definitions("-DQTMANHATTANSTYLE_LIBRARY")
-add_library(${PROJECT_NAME} SHARED ${MOC_HDRS} ${UI_HDRS} ${SRCS} ${MOC_SRCS})
+add_library(${PROJECT_NAME} SHARED ${MOC_HDRS} ${UI_HDRS} ${SRCS} ${MOC_SRCS} ${RC_SRCS})
 
 # Link the target to its dependencies
 target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES})
