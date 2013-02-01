@@ -57,3 +57,6 @@ unix:!symbian {
 
 FORMS += \
     src/doubletabwidget.ui
+
+RESOURCES += \
+    src/resources/resources.qrc

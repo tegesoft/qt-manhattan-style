@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/core/images">
+        <file>progressbar.png</file>
+    </qresource>
+    <qresource prefix="/projectexplorer/images">
+        <file>targetpanel_gradient.png</file>
+        <file>leftselection.png</file>
+        <file>midselection.png</file>
+        <file>rightselection.png</file>
+        <file>targetpanel_bottom.png</file>
+    </qresource>
+</RCC>
