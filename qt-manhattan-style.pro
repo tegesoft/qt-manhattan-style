@@ -4,6 +4,12 @@
 #
 #-------------------------------------------------
 
+QT += core gui
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+# The code still used some deprecated stuff
+DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x040900
+
 TARGET = qt-manhattan-style
 TEMPLATE = lib
 
@@ -64,3 +70,6 @@ FORMS += \
 
 RESOURCES += \
     src/resources/resources.qrc
+
+OTHER_FILES += \
+    CMakeLists.txt

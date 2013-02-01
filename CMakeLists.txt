@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+
 project(qt-manhattan-style)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -19,9 +21,6 @@ set(SRCS
     src/fancyactionbar.cpp
     src/doubletabwidget.cpp
     src/extensions/simpleprogressbar.cpp
-)
-
-set(MOC_HDRS
     src/stylehelper.h
     src/styledbar.h
     src/styleanimator.h
@@ -51,28 +50,28 @@ set(UI_FILES
     src/doubletabwidget.ui
 )
 
-# Find external libraries
-find_package(Qt4 4.8.0 COMPONENTS QtCore QtGui REQUIRED)
-
-# (QT_USE_FILE is a variable defined by find_package(Qt4) that contains a path to CMake script)
-include(${QT_USE_FILE})
-
-# Run moc on needed files
-set(MOC_SRCS) # clear the variable as the next command doesn't do it
-QT4_WRAP_CPP(MOC_SRCS ${MOC_HDRS})
-source_group(moc FILES ${MOC_SRCS})
+# Qt5
+find_package(Qt5Widgets)
+include_directories(${Qt5Widgets_INCLUDE_DIRS})
+add_definitions(${Qt5Widgets_DEFINITIONS})
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_AUTOMOC ON)
 
 # Run uic on ui files
-QT4_WRAP_UI(UI_HDRS ${UI_FILES})
+qt5_wrap_ui(UI_HDRS ${UI_FILES})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}) # UI headers are generated in the binary directory
 
 # this command will generate rules that will run rcc on all files from RCS
 # in result RC_SRCS variable will contain paths to files produced by rcc
-QT4_ADD_RESOURCES(RC_SRCS ${RCS})
+QT5_ADD_RESOURCES(RC_SRCS ${RCS})
+
+# The code still used some deprecated stuff
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x040900)
 
 # Create the target
-add_definitions("-DQTMANHATTANSTYLE_LIBRARY")
-add_library(${PROJECT_NAME} SHARED ${MOC_HDRS} ${UI_HDRS} ${SRCS} ${MOC_SRCS} ${RC_SRCS})
+add_definitions(-DQTMANHATTANSTYLE_LIBRARY)
+add_library(${PROJECT_NAME} SHARED ${SRCS} ${UI_HDRS} ${RC_SRCS})
 
 # Link the target to its dependencies
-target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES})
+# The Qt5Widgets_LIBRARIES variable also includes QtGui and QtCore
+target_link_libraries(${PROJECT_NAME} ${Qt5Widgets_LIBRARIES})

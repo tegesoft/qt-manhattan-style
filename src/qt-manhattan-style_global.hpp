@@ -1,7 +1,7 @@
 #ifndef QTMANHATTANSTYLE_GLOBAL_HPP
 #define QTMANHATTANSTYLE_GLOBAL_HPP
 
-#include <QtCore/qglobal.h>
+#include <qglobal.h>
 
 #if defined(QTMANHATTANSTYLE_LIBRARY)
 #  define QTMANHATTANSTYLESHARED_EXPORT Q_DECL_EXPORT
