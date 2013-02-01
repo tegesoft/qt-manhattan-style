@@ -54,7 +54,8 @@ public:
     static const unsigned int DEFAULT_BASE_COLOR = 0x666666;
 
     // Height of the project explorer navigation bar
-    static int navigationWidgetHeight() { return 24; }
+    static int navigationWidgetHeight();
+    static void setNavigationWidgetHeight(int height);
     static qreal sidebarFontSize();
     static QPalette sidebarFontPalette(const QPalette &original);
 
@@ -94,6 +95,7 @@ public:
 private:
     static QColor m_baseColor;
     static QColor m_requestedBaseColor;
+    static int m_navigationWidgetHeight;
 };
 
 } // namespace Utils
