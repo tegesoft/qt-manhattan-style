@@ -1,5 +1,5 @@
 #include "tabwidget.h"
-#include "stylehelper.h"
+#include "../stylehelper.h"
 #include <QRect>
 #include <QPainter>
 #include <QFont>
