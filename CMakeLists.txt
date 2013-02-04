@@ -40,6 +40,8 @@ set(SRCS
     src/coreconstants.h
     src/qt-manhattan-style_global.hpp
     src/extensions/simpleprogressbar.h
+    src/extensions/tabwidget.h
+    src/extensions/tabwidget.cpp
 )
 
 set(RCS
