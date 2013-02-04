@@ -33,7 +33,8 @@ SOURCES += \
     src/fancylineedit.cpp \
     src/fancyactionbar.cpp \
     src/doubletabwidget.cpp \
-    src/extensions/simpleprogressbar.cpp
+    src/extensions/simpleprogressbar.cpp \
+    src/extensions/tabwidget.cpp
 
 HEADERS +=\
     src/stylehelper.h \
@@ -54,7 +55,8 @@ HEADERS +=\
     src/doubletabwidget.h \
     src/coreconstants.h \
     src/qt-manhattan-style_global.hpp \
-    src/extensions/simpleprogressbar.h
+    src/extensions/simpleprogressbar.h \
+    src/extensions/tabwidget.h
 
 unix:!symbian {
     maemo5 {

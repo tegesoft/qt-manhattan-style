@@ -59,11 +59,11 @@ set(CMAKE_AUTOMOC ON)
 
 # Run uic on ui files
 qt5_wrap_ui(UI_HDRS ${UI_FILES})
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}) # UI headers are generated in the binary directory
+include_directories(${CMAKE_CURRENT_BINARY_DIR}) # UI headers are generated in the binary directory
 
 # this command will generate rules that will run rcc on all files from RCS
 # in result RC_SRCS variable will contain paths to files produced by rcc
-QT5_ADD_RESOURCES(RC_SRCS ${RCS})
+qt5_add_resources(RC_SRCS ${RCS})
 
 # The code still used some deprecated stuff
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x040900)
