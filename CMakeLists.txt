@@ -45,11 +45,11 @@ set(SRCS
 )
 
 set(RCS
-    src/resources/resources.qrc
+    resources/resources.qrc
 )
 
 set(UI_FILES
-    src/doubletabwidget.ui
+    doubletabwidget.ui
 )
 
 # Qt5
