@@ -1,12 +1,13 @@
 #ifndef TABWIDGET_H
 #define TABWIDGET_H
 
+#include "qt-manhattan-style_global.hpp"
 #include <QVector>
 #include <QWidget>
 
 namespace Manhattan {
 
-class TabWidget : public QWidget
+class QTMANHATTANSTYLESHARED_EXPORT TabWidget : public QWidget
 {
     Q_OBJECT
 public:
