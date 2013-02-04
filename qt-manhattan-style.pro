@@ -18,45 +18,45 @@ DEFINES += QTMANHATTANSTYLE_LIBRARY
 INCLUDEPATH += src
 
 SOURCES += \
-    src/stylehelper.cpp \
-    src/styledbar.cpp \
-    src/styleanimator.cpp \
-    src/stringutils.cpp \
-    src/qtcolorbutton.cpp \
-    src/qtcassert.cpp \
-    src/progressbar.cpp \
-    src/minisplitter.cpp \
-    src/manhattanstyle.cpp \
-    src/historycompleter.cpp \
-    src/fancytabwidget.cpp \
-    src/fancymainwindow.cpp \
-    src/fancylineedit.cpp \
-    src/fancyactionbar.cpp \
-    src/doubletabwidget.cpp \
-    src/extensions/simpleprogressbar.cpp \
-    src/extensions/tabwidget.cpp
+    stylehelper.cpp \
+    styledbar.cpp \
+    styleanimator.cpp \
+    stringutils.cpp \
+    qtcolorbutton.cpp \
+    qtcassert.cpp \
+    progressbar.cpp \
+    minisplitter.cpp \
+    manhattanstyle.cpp \
+    historycompleter.cpp \
+    fancytabwidget.cpp \
+    fancymainwindow.cpp \
+    fancylineedit.cpp \
+    fancyactionbar.cpp \
+    doubletabwidget.cpp \
+    extensions/simpleprogressbar.cpp \
+    extensions/tabwidget.cpp
 
 HEADERS +=\
-    src/stylehelper.h \
-    src/styledbar.h \
-    src/styleanimator.h \
-    src/stringutils.h \
-    src/qtcolorbutton.h \
-    src/qtcolorbutton_p.h \
-    src/qtcassert.h \
-    src/progressbar.h \
-    src/minisplitter.h \
-    src/manhattanstyle.h \
-    src/historycompleter.h \
-    src/fancytabwidget.h \
-    src/fancymainwindow.h \
-    src/fancylineedit.h \
-    src/fancyactionbar.h \
-    src/doubletabwidget.h \
-    src/coreconstants.h \
-    src/qt-manhattan-style_global.hpp \
-    src/extensions/simpleprogressbar.h \
-    src/extensions/tabwidget.h
+    stylehelper.h \
+    styledbar.h \
+    styleanimator.h \
+    stringutils.h \
+    qtcolorbutton.h \
+    qtcolorbutton_p.h \
+    qtcassert.h \
+    progressbar.h \
+    minisplitter.h \
+    manhattanstyle.h \
+    historycompleter.h \
+    fancytabwidget.h \
+    fancymainwindow.h \
+    fancylineedit.h \
+    fancyactionbar.h \
+    doubletabwidget.h \
+    coreconstants.h \
+    qt-manhattan-style_global.hpp \
+    extensions/simpleprogressbar.h \
+    extensions/tabwidget.h
 
 unix:!symbian {
     maemo5 {
@@ -68,10 +68,10 @@ unix:!symbian {
 }
 
 FORMS += \
-    src/doubletabwidget.ui
+    doubletabwidget.ui
 
 RESOURCES += \
-    src/resources/resources.qrc
+    resources/resources.qrc
 
 OTHER_FILES += \
     CMakeLists.txt
