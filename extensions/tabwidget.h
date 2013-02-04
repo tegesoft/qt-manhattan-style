@@ -5,6 +5,8 @@
 #include <QVector>
 #include <QWidget>
 
+class QStackedWidget;
+
 namespace Manhattan {
 
 class QTMANHATTANSTYLESHARED_EXPORT TabWidget : public QWidget
@@ -17,8 +19,8 @@ public:
     void setTitle(const QString &title);
     QString title() const { return m_title; }
 
-    void addTab(const QString &name);
-    void insertTab(int index, const QString &name);
+    void addTab(const QString &name, QWidget *widget);
+    void insertTab(int index, const QString &name, QWidget *widget);
     void removeTab(int index);
     int tabCount() const;
 
@@ -37,6 +39,7 @@ protected:
 private:
     struct Tab {
         QString name;
+        QWidget* widget;
     };
     enum HitArea { HITNOTHING, HITOVERFLOW, HITTAB };
     QPair<TabWidget::HitArea, int> convertPosToTab(QPoint pos);
@@ -46,6 +49,7 @@ private:
     int m_currentIndex;
     QVector<int> m_currentTabIndices;
     int m_lastVisibleIndex;
+    QStackedWidget *m_stack;
 };
 
 } // namespace Manhattan
