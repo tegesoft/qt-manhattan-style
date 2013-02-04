@@ -1,7 +1,7 @@
 #ifndef SIMPLEPROGRESSBAR_H
 #define SIMPLEPROGRESSBAR_H
 
-#include "qt-manhattan-style_global.hpp"
+#include "../qt-manhattan-style_global.hpp"
 #include <QWidget>
 
 namespace Manhattan {

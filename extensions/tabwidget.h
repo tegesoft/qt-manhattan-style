@@ -1,7 +1,7 @@
 #ifndef TABWIDGET_H
 #define TABWIDGET_H
 
-#include "qt-manhattan-style_global.hpp"
+#include "../qt-manhattan-style_global.hpp"
 #include <QVector>
 #include <QWidget>
 
