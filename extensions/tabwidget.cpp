@@ -33,7 +33,8 @@ TabWidget::TabWidget(QWidget *parent) :
     QWidget(parent),
     m_currentIndex(-1),
     m_lastVisibleIndex(-1),
-    m_stack(0)
+    m_stack(0),
+    m_drawFrame(false)
 {
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(0, minimumSizeHint().height(), 0, 0);
@@ -67,6 +68,14 @@ void TabWidget::setTitle(const QString &title)
 {
     m_title = title;
     update();
+}
+
+void TabWidget::setFrameVisible(bool visible)
+{
+    if (visible != m_drawFrame) {
+        m_drawFrame = visible;
+        update();
+    }
 }
 
 QSize TabWidget::minimumSizeHint() const
@@ -205,18 +214,15 @@ void TabWidget::paintEvent(QPaintEvent *event)
     QRect r = rect();
 
     QColor baseColor = palette().window().color();
-    QColor backgroundColor = baseColor.darker(115);
+    QColor backgroundColor = baseColor.darker(110);
     QColor lineColor = backgroundColor.darker();
 
     // draw top level tab bar
     r.setHeight(TAB_HEIGHT);
 
     // Fill top bar background
-    painter.fillRect(r, backgroundColor);
-
-    QColor lighter(255, 255, 255, 40);
-    painter.setPen(lighter);
-    painter.drawLine(r.topLeft(), r.topRight());
+    if (!m_drawFrame)
+        painter.fillRect(r, backgroundColor);
 
     QFontMetrics fm(font());
     int baseline = (r.height() + fm.ascent()) / 2 - 1;
@@ -230,11 +236,17 @@ void TabWidget::paintEvent(QPaintEvent *event)
     QRect content(r);
     content.setTop(r.height());
     content.setHeight(height() - r.height());
-    painter.fillRect(content, palette().window().color());
-    painter.setPen(lineColor);
-    painter.drawLine(0, content.bottom(), r.width(), content.bottom());
-    painter.setPen(lineColor);
-    painter.drawLine(0, r.height(), r.width(), r.height());
+    painter.fillRect(content, baseColor);
+
+    // frames
+    if (m_drawFrame) {
+        painter.setPen(lineColor);
+        painter.drawRect(content.adjusted(0, 0, -1, -1));
+    }
+    else {
+        painter.setPen(lineColor);
+        painter.drawLine(r.left(), r.height(), r.right(), r.height());
+    }
 
     // top level tabs
     int x = m_title.isEmpty() ? 0 :
@@ -307,41 +319,67 @@ void TabWidget::paintEvent(QPaintEvent *event)
     for (int i = 0; i <= m_lastVisibleIndex; ++i) {
         int actualIndex = m_currentTabIndices.at(i);
         const Tab& tab = m_tabs.at(actualIndex);
-        if (actualIndex == m_currentIndex) {
-            painter.setPen(Utils::StyleHelper::borderColor());
-            painter.drawLine(x - 1, 0, x - 1, r.height() - 1);
-            painter.fillRect(QRect(x, 0,
+
+        painter.setPen(lineColor);
+
+        // top
+        if (m_drawFrame) {
+            painter.drawLine(x, 0, x + 2 * MARGIN + fm.width(tab.name), 0);
+        }
+
+        if (actualIndex == m_currentIndex) {            
+            // tab background
+            painter.fillRect(QRect(x, 1,
                                    2 * MARGIN + fm.width(tab.name),
                                    r.height() + 1),
                              baseColor);
 
-            if (actualIndex != 0) {
-
-                painter.setPen(QColor(255, 255, 255, 170));
-                painter.drawLine(x, 0, x, r.height());
+            // Left
+            if (actualIndex == 0) {
+                if (m_drawFrame)
+                    painter.drawLine(x, 0, x, r.height()+1);
             }
+            else {
+                painter.drawLine(x - 1, 0, x - 1, r.height() - 1);
+                painter.setPen(QColor(255, 255, 255, 170));
+                painter.drawLine(x, 1, x, r.height());
+            }
+
             x += MARGIN;
             painter.setPen(Qt::black);
             painter.drawText(x, baseline, tab.name);
             x += nameWidth.at(actualIndex);
             x += MARGIN;
-            //painter.setPen(Utils::StyleHelper::borderColor());
             painter.setPen(lineColor);
             painter.drawLine(x, 0, x, r.height() - 1);
             painter.setPen(QColor(0, 0, 0, 20));
             painter.drawLine(x + 1, 0, x + 1, r.height() - 1);
             painter.setPen(QColor(255, 255, 255, 170));
-            painter.drawLine(x - 1, 0, x - 1, r.height());
+            painter.drawLine(x - 1, 1, x - 1, r.height());
         } else {
-            if (i == 0)
-                drawFirstLevelSeparator(&painter, QPoint(x, 0), QPoint(x, r.height()-1));
+            // tab background
+            painter.fillRect(QRect(x + 1, 1,
+                                   2 * MARGIN + fm.width(tab.name),
+                                   r.height()-1),
+                             backgroundColor);
+
+            // left
+            if (m_drawFrame && (actualIndex == 0))
+                painter.drawLine(x, 0, x, r.height());
+
             x += MARGIN;
-            //painter.setPen(Utils::StyleHelper::panelTextColor());
             painter.setPen(QColor(0, 0, 0, 190));
             painter.drawText(x + 1, baseline, tab.name);
             x += nameWidth.at(actualIndex);
             x += MARGIN;
-            drawFirstLevelSeparator(&painter, QPoint(x, 0), QPoint(x, r.height()-1));
+            if (!m_drawFrame || (actualIndex != m_lastVisibleIndex))
+                drawFirstLevelSeparator(&painter, QPoint(x, 1), QPoint(x, r.height()-1));
+        }
+
+        // end of tabs right vertical line
+        if (m_drawFrame && (actualIndex == m_lastVisibleIndex)) {
+            painter.setPen(lineColor);
+            painter.drawLine(x, 0, x, r.height() - 1);
         }
     }
 
