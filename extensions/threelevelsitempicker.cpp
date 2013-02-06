@@ -75,7 +75,7 @@ ThreeLevelsItemPicker::ThreeLevelsItemPicker(const QString& level1Title,
     p.setColor(QPalette::Text, QColor(255, 255, 255, 160));
     setPalette(p);
     setProperty("panelwidget", true);
-    setContentsMargins(QMargins(0, 1, 1, 8));
+    setContentsMargins(QMargins(0, 0, 1, 8));
     setWindowFlags(Qt::Popup);
 
     // List widgets
@@ -184,7 +184,6 @@ void ThreeLevelsItemPicker::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     painter.setPen(Manhattan::Utils::StyleHelper::borderColor());
-    painter.drawLine(rect().topLeft(), rect().topRight());
     painter.drawLine(rect().topRight(), rect().bottomRight());
 
     QRect bottomRect(0, rect().height() - 8, rect().width(), 8);
