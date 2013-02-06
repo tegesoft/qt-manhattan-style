@@ -73,6 +73,9 @@ class QTMANHATTANSTYLESHARED_EXPORT FancyActionBar : public QWidget
 public:
     FancyActionBar(QWidget *parent = 0);
 
+    enum SeparatorType { None = 0, Top, Bottom };
+    void setSeparator(SeparatorType type);
+
     void paintEvent(QPaintEvent *event);
     void insertAction(int index, QAction *action);
     void addProjectSelector(QAction *action);
@@ -81,6 +84,7 @@ public:
 
 private:
     QVBoxLayout *m_actionsLayout;
+    SeparatorType m_separator;
 };
 
 } // namespace Manhattan

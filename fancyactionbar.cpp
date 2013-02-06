@@ -262,16 +262,36 @@ void FancyToolButton::paintEvent(QPaintEvent *event)
     }
 }
 
+void FancyActionBar::setSeparator(SeparatorType type)
+{
+    if (type != m_separator) {
+        m_separator = type;
+        update();
+    }
+}
+
 void FancyActionBar::paintEvent(QPaintEvent *event)
 {
-    QPainter painter(this);
     Q_UNUSED(event)
+
+    if (m_separator == None)
+        return;
+
+    QPainter painter(this);
     QColor light = Utils::StyleHelper::sidebarHighlight();
     QColor dark = Utils::StyleHelper::sidebarShadow();
-    painter.setPen(dark);
-    painter.drawLine(rect().topLeft(), rect().topRight());
-    painter.setPen(light);
-    painter.drawLine(rect().topLeft() + QPoint(1,1), rect().topRight() + QPoint(0,1));
+    if (m_separator == Top) {
+        painter.setPen(dark);
+        painter.drawLine(rect().topLeft(), rect().topRight());
+        painter.setPen(light);
+        painter.drawLine(rect().topLeft() + QPoint(1,1), rect().topRight() + QPoint(0,1));
+    }
+    else {
+        painter.setPen(dark);
+        painter.drawLine(rect().bottomLeft() - QPoint(0,2), rect().bottomRight() - QPoint(0,2));
+        painter.setPen(light);
+        painter.drawLine(rect().bottomLeft() - QPoint(1,1), rect().bottomRight() - QPoint(0,1));
+    }
 }
 
 QSize FancyToolButton::sizeHint() const
@@ -310,6 +330,7 @@ void FancyToolButton::actionChanged()
 
 FancyActionBar::FancyActionBar(QWidget *parent)
     : QWidget(parent)
+    , m_separator(Top)
 {
     setObjectName(QLatin1String("actionbar"));
     m_actionsLayout = new QVBoxLayout;
