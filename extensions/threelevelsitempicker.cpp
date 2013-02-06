@@ -142,6 +142,24 @@ void ThreeLevelsItemPicker::setVisible(bool visible)
     m_triggerAction->setChecked(visible);
 }
 
+QString ThreeLevelsItemPicker::level1() const
+{
+    QListWidgetItem* item = m_level1Items->currentItem();
+    return item ? item->text() : QString();
+}
+
+QString ThreeLevelsItemPicker::level2() const
+{
+    QListWidgetItem* item = m_level2Items->currentItem();
+    return item ? item->text() : QString();
+}
+
+QString ThreeLevelsItemPicker::level3() const
+{
+    QListWidgetItem* item = m_level3Items->currentItem();
+    return item ? item->text() : QString();
+}
+
 void ThreeLevelsItemPicker::setLevel1(const QString& name)
 {
     m_level2Items->clear();
@@ -164,7 +182,7 @@ void ThreeLevelsItemPicker::setLevel3(const QString& name)
     m_triggerAction->setProperty("subtitle", item ? item->text() : "");
     QTimer::singleShot(200, this, SLOT(hide()));
 
-    emit itemChanged(name);
+    emit itemChanged();
 }
 
 // This is a workaround for the problem that Windows

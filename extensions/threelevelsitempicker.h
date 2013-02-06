@@ -39,8 +39,12 @@ public:
     inline QAction* triggerAction() const { return m_triggerAction; }
     void setVisible(bool visible);
 
+    QString level1() const;
+    QString level2() const;
+    QString level3() const;
+
 signals:
-    void itemChanged(const QString& name);
+    void itemChanged();
 
 private slots:
     void setLevel1(const QString& name);
