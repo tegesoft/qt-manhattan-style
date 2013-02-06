@@ -148,9 +148,12 @@ public:
     void removeTab(int index);
     void removeTabs();
     void setBackgroundBrush(const QBrush &brush);
-    void addCornerWidget(QWidget *widget);
-    void insertCornerWidget(int pos, QWidget *widget);
-    int cornerWidgetCount() const;
+    void addTopCornerWidget(QWidget *widget);
+    void insertTopCornerWidget(int pos, QWidget *widget);
+    void addBottomCornerWidget(QWidget *widget);
+    void insertBottomCornerWidget(int pos, QWidget *widget);
+    int topCornerWidgetCount() const;
+    int bottomCornerWidgetCount() const;
     void setTabToolTip(int index, const QString &toolTip);
 
     void paintEvent(QPaintEvent *event);
@@ -174,7 +177,8 @@ private slots:
 
 private:
     FancyTabBar *m_tabBar;
-    QWidget *m_cornerWidgetContainer;
+    QWidget *m_topCornerWidgetContainer;
+    QWidget *m_bottomCornerWidgetContainer;
     QStackedLayout *m_modesStack;
     QWidget *m_selectionWidget;
     QStatusBar *m_statusBar;

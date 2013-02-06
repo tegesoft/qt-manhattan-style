@@ -385,6 +385,7 @@ FancyTabWidget::FancyTabWidget(QWidget *parent)
     selectionLayout->setSpacing(0);
     selectionLayout->setMargin(0);
 
+    // top stub
     StyledBar *bar = new StyledBar;
     QHBoxLayout *layout = new QHBoxLayout(bar);
     layout->setMargin(0);
@@ -392,21 +393,32 @@ FancyTabWidget::FancyTabWidget(QWidget *parent)
     layout->addWidget(new FancyColorButton(this));
     selectionLayout->addWidget(bar);
 
+    // top corner widget container
+    m_topCornerWidgetContainer = new QWidget(this);
+    m_topCornerWidgetContainer->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+    m_topCornerWidgetContainer->setAutoFillBackground(false);
+    QVBoxLayout *topCornerWidgetLayout = new QVBoxLayout;
+    topCornerWidgetLayout->setSpacing(0);
+    topCornerWidgetLayout->setMargin(0);
+    topCornerWidgetLayout->addStretch();
+    m_topCornerWidgetContainer->setLayout(topCornerWidgetLayout);
+    selectionLayout->addWidget(m_topCornerWidgetContainer, 0);
+
+    // Tab bar
     selectionLayout->addWidget(m_tabBar, 1);
     m_selectionWidget->setLayout(selectionLayout);
     m_selectionWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 
-    m_cornerWidgetContainer = new QWidget(this);
-    m_cornerWidgetContainer->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
-    m_cornerWidgetContainer->setAutoFillBackground(false);
-
-    QVBoxLayout *cornerWidgetLayout = new QVBoxLayout;
-    cornerWidgetLayout->setSpacing(0);
-    cornerWidgetLayout->setMargin(0);
-    cornerWidgetLayout->addStretch();
-    m_cornerWidgetContainer->setLayout(cornerWidgetLayout);
-
-    selectionLayout->addWidget(m_cornerWidgetContainer, 0);
+    // bottom corner widget container
+    m_bottomCornerWidgetContainer = new QWidget(this);
+    m_bottomCornerWidgetContainer->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+    m_bottomCornerWidgetContainer->setAutoFillBackground(false);
+    QVBoxLayout *bottomCornerWidgetLayout = new QVBoxLayout;
+    bottomCornerWidgetLayout->setSpacing(0);
+    bottomCornerWidgetLayout->setMargin(0);
+    bottomCornerWidgetLayout->addStretch();
+    m_bottomCornerWidgetContainer->setLayout(bottomCornerWidgetLayout);
+    selectionLayout->addWidget(m_bottomCornerWidgetContainer, 0);
 
     m_modesStack = new QStackedLayout;
     m_statusBar = new QStatusBar;
@@ -458,9 +470,12 @@ void FancyTabWidget::setBackgroundBrush(const QBrush &brush)
     QPalette pal = m_tabBar->palette();
     pal.setBrush(QPalette::Mid, brush);
     m_tabBar->setPalette(pal);
-    pal = m_cornerWidgetContainer->palette();
+    pal = m_topCornerWidgetContainer->palette();
     pal.setBrush(QPalette::Mid, brush);
-    m_cornerWidgetContainer->setPalette(pal);
+    m_topCornerWidgetContainer->setPalette(pal);
+    pal = m_bottomCornerWidgetContainer->palette();
+    pal.setBrush(QPalette::Mid, brush);
+    m_bottomCornerWidgetContainer->setPalette(pal);
 }
 
 void FancyTabWidget::paintEvent(QPaintEvent *event)
@@ -479,20 +494,36 @@ void FancyTabWidget::paintEvent(QPaintEvent *event)
     painter.drawLine(rect.bottomLeft(), rect.bottomRight());
 }
 
-void FancyTabWidget::insertCornerWidget(int pos, QWidget *widget)
+void FancyTabWidget::insertTopCornerWidget(int pos, QWidget *widget)
 {
-    QVBoxLayout *layout = static_cast<QVBoxLayout *>(m_cornerWidgetContainer->layout());
+    QVBoxLayout *layout = static_cast<QVBoxLayout *>(m_topCornerWidgetContainer->layout());
     layout->insertWidget(pos, widget);
 }
 
-int FancyTabWidget::cornerWidgetCount() const
+int FancyTabWidget::topCornerWidgetCount() const
 {
-    return m_cornerWidgetContainer->layout()->count();
+    return m_topCornerWidgetContainer->layout()->count();
 }
 
-void FancyTabWidget::addCornerWidget(QWidget *widget)
+void FancyTabWidget::addTopCornerWidget(QWidget *widget)
 {
-    m_cornerWidgetContainer->layout()->addWidget(widget);
+    m_topCornerWidgetContainer->layout()->addWidget(widget);
+}
+
+void FancyTabWidget::insertBottomCornerWidget(int pos, QWidget *widget)
+{
+    QVBoxLayout *layout = static_cast<QVBoxLayout *>(m_bottomCornerWidgetContainer->layout());
+    layout->insertWidget(pos, widget);
+}
+
+int FancyTabWidget::bottomCornerWidgetCount() const
+{
+    return m_bottomCornerWidgetContainer->layout()->count();
+}
+
+void FancyTabWidget::addBottomCornerWidget(QWidget *widget)
+{
+    m_bottomCornerWidgetContainer->layout()->addWidget(widget);
 }
 
 int FancyTabWidget::currentIndex() const
