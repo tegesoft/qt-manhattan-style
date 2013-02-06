@@ -40,6 +40,8 @@ set(SRCS
     extensions/simpleprogressbar.h
     extensions/tabwidget.h
     extensions/tabwidget.cpp
+    extensions/threelevelsitempicker.h
+    extensions/threelevelsitempicker.cpp
 )
 
 set(RCS

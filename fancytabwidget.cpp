@@ -444,6 +444,15 @@ void FancyTabWidget::removeTab(int index)
     m_tabBar->removeTab(index);
 }
 
+void FancyTabWidget::removeTabs()
+{
+    while (m_modesStack->count() != 0)
+    {
+        m_modesStack->removeWidget(m_modesStack->widget(0));
+        m_tabBar->removeTab(0);
+    }
+}
+
 void FancyTabWidget::setBackgroundBrush(const QBrush &brush)
 {
     QPalette pal = m_tabBar->palette();

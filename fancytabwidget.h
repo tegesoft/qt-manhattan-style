@@ -146,6 +146,7 @@ public:
 
     void insertTab(int index, QWidget *tab, const QIcon &icon, const QString &label);
     void removeTab(int index);
+    void removeTabs();
     void setBackgroundBrush(const QBrush &brush);
     void addCornerWidget(QWidget *widget);
     void insertCornerWidget(int pos, QWidget *widget);

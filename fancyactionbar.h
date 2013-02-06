@@ -30,6 +30,7 @@
 #ifndef FANCYACTIONBAR_H
 #define FANCYACTIONBAR_H
 
+#include "qt-manhattan-style_global.hpp"
 #include <QToolButton>
 
 QT_BEGIN_NAMESPACE
@@ -38,7 +39,7 @@ QT_END_NAMESPACE
 
 namespace Manhattan {
 
-class FancyToolButton : public QToolButton
+class QTMANHATTANSTYLESHARED_EXPORT FancyToolButton : public QToolButton
 {
     Q_OBJECT
 
@@ -65,7 +66,7 @@ private:
     bool m_hasForceVisible;
 };
 
-class FancyActionBar : public QWidget
+class QTMANHATTANSTYLESHARED_EXPORT FancyActionBar : public QWidget
 {
     Q_OBJECT
 
