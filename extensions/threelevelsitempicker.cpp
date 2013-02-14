@@ -80,14 +80,14 @@ ThreeLevelsItemPicker::ThreeLevelsItemPicker(const QString& level1Title,
 
     // List widgets
     m_level1Items = new ListWidget;
-    m_level1Items->setMaxCount(3);
+    m_level1Items->setMaxCount(5);
     m_level1Items->addItems(m_level2ItemsFromlevel1.keys());
     connect(m_level1Items, SIGNAL(currentTextChanged(QString)), this, SLOT(setLevel1(QString)));
     m_level2Items = new ListWidget;
-    m_level2Items->setMaxCount(m_level2ItemsFromlevel1.count());
+    m_level2Items->setMaxCount(5);
     connect(m_level2Items, SIGNAL(currentTextChanged(QString)), this, SLOT(setLevel2(QString)));
     m_level3Items = new ListWidget;
-    m_level3Items->setMaxCount(m_level3ItemsFromLevel2.count());
+    m_level3Items->setMaxCount(5);
     connect(m_level3Items, SIGNAL(currentTextChanged(QString)), this, SLOT(setLevel3(QString)));
 
     QGridLayout *grid = new QGridLayout(this);
@@ -140,6 +140,13 @@ void ThreeLevelsItemPicker::setVisible(bool visible)
 
     QWidget::setVisible(visible);
     m_triggerAction->setChecked(visible);
+}
+
+void ThreeLevelsItemPicker::setMaxVisibleItemCount(int count)
+{
+    m_level1Items->setMaxCount(count);
+    m_level2Items->setMaxCount(count);
+    m_level3Items->setMaxCount(count);
 }
 
 QString ThreeLevelsItemPicker::level1() const
@@ -280,10 +287,14 @@ ListWidget::ListWidget(QWidget *parent)
     setFocusPolicy(Qt::WheelFocus);
     setItemDelegate(new TargetSelectorDelegate(this));
     setAttribute(Qt::WA_MacShowFocusRect, false);
-    setStyleSheet(QString::fromLatin1("QListWidget { background: #464646; border-style: none; }"));
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-}
 
+    // Style
+    QFile file(":/extensions/qss/threelevelsitempicker-listwidget.qss");
+    file.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(file.readAll());
+    setStyleSheet(styleSheet);
+}
 
 QSize ListWidget::sizeHint() const
 {

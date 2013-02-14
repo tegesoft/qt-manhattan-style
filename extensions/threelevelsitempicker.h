@@ -38,6 +38,7 @@ public:
 
     inline QAction* triggerAction() const { return m_triggerAction; }
     void setVisible(bool visible);
+    void setMaxVisibleItemCount(int count);
 
     QString level1() const;
     QString level2() const;
