@@ -125,6 +125,11 @@ int TabWidget::tabCount() const
     return m_tabs.size();
 }
 
+QString TabWidget::tabText(int index) const
+{
+    return m_tabs.value(index).name;
+}
+
 /// Converts a position to the tab that is undeneath
 /// If HitArea is tab, then the second part of the pair
 /// is the tab number

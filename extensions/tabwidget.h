@@ -23,6 +23,7 @@ public:
     void insertTab(int index, const QString &name, QWidget *widget);
     void removeTab(int index);
     int tabCount() const;
+    QString tabText(int index) const;
 
     int currentIndex() const;
     void setCurrentIndex(int index);
