@@ -30,6 +30,7 @@
 #ifndef FANCYACTIONBAR_H
 #define FANCYACTIONBAR_H
 
+#include "qt-manhattan-style_global.hpp"
 #include <QToolButton>
 
 QT_BEGIN_NAMESPACE
@@ -38,7 +39,7 @@ QT_END_NAMESPACE
 
 namespace Manhattan {
 
-class FancyToolButton : public QToolButton
+class QTMANHATTANSTYLESHARED_EXPORT FancyToolButton : public QToolButton
 {
     Q_OBJECT
 
@@ -65,12 +66,15 @@ private:
     bool m_hasForceVisible;
 };
 
-class FancyActionBar : public QWidget
+class QTMANHATTANSTYLESHARED_EXPORT FancyActionBar : public QWidget
 {
     Q_OBJECT
 
 public:
     FancyActionBar(QWidget *parent = 0);
+
+    enum SeparatorType { None = 0, Top, Bottom };
+    void setSeparator(SeparatorType type);
 
     void paintEvent(QPaintEvent *event);
     void insertAction(int index, QAction *action);
@@ -80,6 +84,7 @@ public:
 
 private:
     QVBoxLayout *m_actionsLayout;
+    SeparatorType m_separator;
 };
 
 } // namespace Manhattan

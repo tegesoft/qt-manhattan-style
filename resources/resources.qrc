@@ -9,4 +9,16 @@
         <file>rightselection.png</file>
         <file>targetpanel_bottom.png</file>
     </qresource>
+    <qresource prefix="/extensions/images">
+        <file>scrollbar-vertical-up-highlight.png</file>
+        <file>scrollbar-vertical-background.png</file>
+        <file>scrollbar-vertical-down.png</file>
+        <file>scrollbar-vertical-down-highlight.png</file>
+        <file>scrollbar-vertical-slider.png</file>
+        <file>scrollbar-vertical-slider-highlight.png</file>
+        <file>scrollbar-vertical-up.png</file>
+    </qresource>
+    <qresource prefix="/extensions/qss">
+        <file>threelevelsitempicker-listwidget.qss</file>
+    </qresource>
 </RCC>

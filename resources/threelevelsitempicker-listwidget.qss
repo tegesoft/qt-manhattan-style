@@ -1,0 +1,48 @@
+QListWidget {
+    background: #464646;
+    border-style: none;
+}
+
+QScrollBar:vertical {
+    margin: 17px 0 17px 0;
+    border-image: url(:extensions/images/scrollbar-vertical-background.png) 10 0 10 0 stretch stretch;
+}
+
+QScrollBar::handle:vertical {
+    border-width: 1px;
+    border-image: url(:extensions/images/scrollbar-vertical-slider.png) 2 1 2 1 stretch stretch;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    border-image: url(:extensions/images/scrollbar-vertical-slider-highlight.png) 2 1 2 1 stretch stretch;
+    min-height: 20px;
+}
+
+QScrollBar::add-line:vertical {
+    border-image: url(:extensions/images/scrollbar-vertical-down.png);
+    height: 16px;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical:hover {
+    border-image: url(:extensions/images/scrollbar-vertical-down-highlight.png);
+    height: 16px;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical {
+    border-image: url(:extensions/images/scrollbar-vertical-up.png);
+    height: 16px;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical:hover {
+    border-image: url(:extensions/images/scrollbar-vertical-up-highlight.png);
+    height: 16px;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}

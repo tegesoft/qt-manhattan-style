@@ -1,5 +1,5 @@
 #include "simpleprogressbar.h"
-#include "stylehelper.h"
+#include "../stylehelper.h"
 
 #include <QPainter>
 #include <QBrush>

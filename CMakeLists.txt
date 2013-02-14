@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 2.8)
 
 project(qt-manhattan-style)
 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
-
 set(SRCS
     stylehelper.cpp
     styledbar.cpp
@@ -42,6 +40,8 @@ set(SRCS
     extensions/simpleprogressbar.h
     extensions/tabwidget.h
     extensions/tabwidget.cpp
+    extensions/threelevelsitempicker.h
+    extensions/threelevelsitempicker.cpp
 )
 
 set(RCS

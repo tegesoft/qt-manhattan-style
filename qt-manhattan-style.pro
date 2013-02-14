@@ -34,7 +34,8 @@ SOURCES += \
     fancyactionbar.cpp \
     doubletabwidget.cpp \
     extensions/simpleprogressbar.cpp \
-    extensions/tabwidget.cpp
+    extensions/tabwidget.cpp \
+    extensions/threelevelsitempicker.cpp
 
 HEADERS +=\
     stylehelper.h \
@@ -56,7 +57,8 @@ HEADERS +=\
     coreconstants.h \
     qt-manhattan-style_global.hpp \
     extensions/simpleprogressbar.h \
-    extensions/tabwidget.h
+    extensions/tabwidget.h \
+    extensions/threelevelsitempicker.h
 
 unix:!symbian {
     maemo5 {

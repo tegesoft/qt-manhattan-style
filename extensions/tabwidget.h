@@ -19,6 +19,8 @@ public:
     void setTitle(const QString &title);
     QString title() const { return m_title; }
 
+    void setFrameVisible(bool visible);
+
     void addTab(const QString &name, QWidget *widget);
     void insertTab(int index, const QString &name, QWidget *widget);
     void removeTab(int index);
@@ -51,6 +53,7 @@ private:
     QVector<int> m_currentTabIndices;
     int m_lastVisibleIndex;
     QStackedWidget *m_stack;
+    bool m_drawFrame;
 };
 
 } // namespace Manhattan
