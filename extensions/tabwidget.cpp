@@ -80,7 +80,9 @@ void TabWidget::setFrameVisible(bool visible)
 
 QSize TabWidget::minimumSizeHint() const
 {
-    return QSize(0, TAB_HEIGHT + CONTENT_HEIGHT_MARGIN + 1);
+    QSize size = QWidget::minimumSizeHint();
+    size.rheight() += TAB_HEIGHT + CONTENT_HEIGHT_MARGIN + 1;
+    return size;
 }
 
 void TabWidget::addTab(const QString &name, QWidget *widget)
