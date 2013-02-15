@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.9)
 
 project(qt-manhattan-style)
 
@@ -53,15 +53,12 @@ set(UI_FILES
 )
 
 # Qt5
-find_package(Qt5Widgets)
-include_directories(${Qt5Widgets_INCLUDE_DIRS})
-add_definitions(${Qt5Widgets_DEFINITIONS})
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
+find_package(Qt5Widgets)
 
 # Run uic on ui files
 qt5_wrap_ui(UI_HDRS ${UI_FILES})
-include_directories(${CMAKE_CURRENT_BINARY_DIR}) # UI headers are generated in the binary directory
 
 # this command will generate rules that will run rcc on all files from RCS
 # in result RC_SRCS variable will contain paths to files produced by rcc
@@ -77,3 +74,5 @@ add_library(${PROJECT_NAME} SHARED ${SRCS} ${UI_HDRS} ${RC_SRCS})
 # Link the target to its dependencies
 # The Qt5Widgets_LIBRARIES variable also includes QtGui and QtCore
 target_link_libraries(${PROJECT_NAME} ${Qt5Widgets_LIBRARIES})
+
+qt5_use_modules(${PROJECT_NAME} Widgets)
