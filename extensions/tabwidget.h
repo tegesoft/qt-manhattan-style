@@ -37,7 +37,6 @@ protected:
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent *event);
     bool event(QEvent *event);
-    QSize minimumSizeHint() const;
 
 private:
     struct Tab {

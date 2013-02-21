@@ -37,7 +37,7 @@ TabWidget::TabWidget(QWidget *parent) :
     m_drawFrame(false)
 {
     QVBoxLayout *layout = new QVBoxLayout;
-    layout->setContentsMargins(0, minimumSizeHint().height(), 0, 0);
+    layout->setContentsMargins(0, TAB_HEIGHT + CONTENT_HEIGHT_MARGIN + 1, 0, 0);
     m_stack = new QStackedWidget;
     layout->addWidget(m_stack);
     setLayout(layout);
@@ -76,13 +76,6 @@ void TabWidget::setFrameVisible(bool visible)
         m_drawFrame = visible;
         update();
     }
-}
-
-QSize TabWidget::minimumSizeHint() const
-{
-    QSize size = QWidget::minimumSizeHint();
-    size.rheight() += TAB_HEIGHT + CONTENT_HEIGHT_MARGIN + 1;
-    return size;
 }
 
 void TabWidget::addTab(const QString &name, QWidget *widget)
