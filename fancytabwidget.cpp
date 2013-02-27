@@ -400,7 +400,6 @@ FancyTabWidget::FancyTabWidget(QWidget *parent)
     QVBoxLayout *topCornerWidgetLayout = new QVBoxLayout;
     topCornerWidgetLayout->setSpacing(0);
     topCornerWidgetLayout->setMargin(0);
-    topCornerWidgetLayout->addStretch();
     m_topCornerWidgetContainer->setLayout(topCornerWidgetLayout);
     selectionLayout->addWidget(m_topCornerWidgetContainer, 0);
 
@@ -416,7 +415,6 @@ FancyTabWidget::FancyTabWidget(QWidget *parent)
     QVBoxLayout *bottomCornerWidgetLayout = new QVBoxLayout;
     bottomCornerWidgetLayout->setSpacing(0);
     bottomCornerWidgetLayout->setMargin(0);
-    bottomCornerWidgetLayout->addStretch();
     m_bottomCornerWidgetContainer->setLayout(bottomCornerWidgetLayout);
     selectionLayout->addWidget(m_bottomCornerWidgetContainer, 0);
 
