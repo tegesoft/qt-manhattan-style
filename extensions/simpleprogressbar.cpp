@@ -27,6 +27,8 @@ SimpleProgressBar::~SimpleProgressBar()
 void SimpleProgressBar::reset()
 {
     m_value = m_minimum;
+    m_finished = false;
+    m_error = false;
     update();
 }
 
