@@ -44,6 +44,10 @@ public:
     QString level2() const;
     QString level3() const;
 
+    void setLevel1Item(const QString& name);
+    void setLevel2Item(const QString& name);
+    void setLevel3Item(const QString& name);
+
 signals:
     void itemChanged();
 
