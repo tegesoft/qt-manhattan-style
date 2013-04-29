@@ -13,12 +13,20 @@ namespace Manhattan {
 class ListWidget : public QListWidget
 {
     Q_OBJECT
+
 public:
     ListWidget(QWidget *parent = 0);
     QSize sizeHint() const;
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
     void setMaxCount(int maxCount);
+
+signals:
+    void itemReselected();
+
+protected:
+    void mouseReleaseEvent(QMouseEvent* event);
+
 private:
     int m_maxCount;
 };
@@ -55,6 +63,7 @@ private slots:
     void setLevel1(const QString& name);
     void setLevel2(const QString& name);
     void setLevel3(const QString& name);
+    void smoothHide();
 
 private:
     void mousePressEvent(QMouseEvent *);

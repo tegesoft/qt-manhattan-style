@@ -89,6 +89,7 @@ ThreeLevelsItemPicker::ThreeLevelsItemPicker(const QString& level1Title,
     m_level3Items = new ListWidget;
     m_level3Items->setMaxCount(5);
     connect(m_level3Items, SIGNAL(currentTextChanged(QString)), this, SLOT(setLevel3(QString)));
+    connect(m_level3Items, SIGNAL(itemReselected()), this, SLOT(hide()));
 
     QGridLayout *grid = new QGridLayout(this);
     grid->setMargin(0);
@@ -225,9 +226,13 @@ void ThreeLevelsItemPicker::setLevel3(const QString& name)
     m_triggerAction->setProperty("heading", name);
     QListWidgetItem* item = m_level2Items->currentItem();
     m_triggerAction->setProperty("subtitle", item ? item->text() : "");
-    QTimer::singleShot(200, this, SLOT(hide()));
-
+    smoothHide();
     emit itemChanged();
+}
+
+void ThreeLevelsItemPicker::smoothHide()
+{
+    QTimer::singleShot(200, this, SLOT(hide()));
 }
 
 // This is a workaround for the problem that Windows
@@ -365,4 +370,14 @@ void ListWidget::setMaxCount(int maxCount)
     // updateGeometry (which then would jump ugly)
     m_maxCount = maxCount;
     updateGeometry();
+}
+
+void ListWidget::mouseReleaseEvent(QMouseEvent* event)
+{
+    QListWidgetItem* item = currentItem();
+    QListWidget::mouseReleaseEvent(event);
+    if (item == currentItem())
+    {
+        emit itemReselected();
+    }
 }
