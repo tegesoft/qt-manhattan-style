@@ -180,7 +180,7 @@ QListWidgetItem* find(const ListWidget* list, const QString& name)
             return item;
     }
 
-    return nullptr;
+    return 0;
 }
 
 } // Anonymous namespace
