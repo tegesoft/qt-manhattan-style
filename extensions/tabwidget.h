@@ -21,8 +21,8 @@ public:
 
     void setFrameVisible(bool visible);
 
-    void addTab(const QString &name, QWidget *widget);
-    void insertTab(int index, const QString &name, QWidget *widget);
+    void addTab(const QString &name, QWidget *widget, const QColor &color = Qt::black);
+    void insertTab(int index, const QString &name, QWidget *widget, const QColor &color = Qt::black);
     void removeTab(int index);
     int tabCount() const;
     QString tabText(int index) const;
@@ -41,6 +41,7 @@ protected:
 private:
     struct Tab {
         QString name;
+        QColor color;
         QWidget* widget;
     };
     enum HitArea { HITNOTHING, HITOVERFLOW, HITTAB };
