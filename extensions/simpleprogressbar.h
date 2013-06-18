@@ -22,10 +22,12 @@ public:
     int maximum() const { return m_maximum; }
     int value() const { return m_value; }
     bool finished() const { return m_finished; }
-    void reset();
     void setRange(int minimum, int maximum);
     void setValue(int value);
     void setFinished(bool b);
+
+public slots:
+    void reset();
 
 private:
     QImage bar;
