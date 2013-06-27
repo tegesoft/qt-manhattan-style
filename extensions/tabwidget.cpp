@@ -110,9 +110,9 @@ void TabWidget::insertTab(int index, const QString &name, QWidget *widget, const
     update();
 }
 
-void TabWidget::removeTab(int index)
+QWidget* TabWidget::removeTab(int index)
 {
-    m_tabs.takeAt(index);
+    Tab tab = m_tabs.takeAt(index);
     if (index <= m_currentIndex) {
         --m_currentIndex;
         if (m_currentIndex < 0 && m_tabs.size() > 0)
@@ -124,6 +124,7 @@ void TabWidget::removeTab(int index)
         }
     }
     update();
+    return tab.widget;
 }
 
 int TabWidget::tabCount() const

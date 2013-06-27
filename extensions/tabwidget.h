@@ -23,7 +23,7 @@ public:
 
     void addTab(const QString &name, QWidget *widget, const QColor &color = Qt::black);
     void insertTab(int index, const QString &name, QWidget *widget, const QColor &color = Qt::black);
-    void removeTab(int index);
+    QWidget* removeTab(int index);
     int tabCount() const;
     QString tabText(int index) const;
 
