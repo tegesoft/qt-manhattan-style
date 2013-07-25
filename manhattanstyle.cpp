@@ -126,6 +126,24 @@ bool lightColored(const QWidget *widget)
     return false;
 }
 
+bool hasProperty(const QWidget *widget, const QByteArray& name)
+{
+    if (!widget)
+        return false;
+
+    // Don't style dialogs or explicitly ignored widgets
+    if ((widget->window()->windowFlags() & Qt::WindowType_Mask) == Qt::Dialog)
+        return false;
+
+    const QWidget *p = widget;
+    while (p) {
+        if (p->property(name).isValid())
+            return true;
+        p = p->parentWidget();
+    }
+    return false;
+}
+
 class ManhattanStylePrivate
 {
 public:
@@ -630,7 +648,8 @@ void ManhattanStyle::drawControl(ControlElement element, const QStyleOption *opt
 
         if (const QStyleOptionTabV3 *tab = qstyleoption_cast<const QStyleOptionTabV3 *>(option)) {
             QStyleOptionTabV3 adjustedTab = *tab;
-            if (tab->cornerWidgets == QStyleOptionTab::NoCornerWidgets && (
+            if (!hasProperty(widget, "noTabBarShapeAdjustment") &&
+                tab->cornerWidgets == QStyleOptionTab::NoCornerWidgets && (
                     tab->position == QStyleOptionTab::Beginning ||
                     tab->position == QStyleOptionTab::OnlyOneTab))
             {
