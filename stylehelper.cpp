@@ -323,7 +323,6 @@ void StyleHelper::drawArrow(QStyle::PrimitiveElement element, QPainter *painter,
         imagePainter.translate(sx + bsx, sy + bsy);
 
         if (!(option->state & QStyle::State_Enabled)) {
-            QColor foreGround(150, 150, 150, 150);
             imagePainter.setBrush(option->palette.mid().color());
             imagePainter.setPen(option->palette.mid().color());
         } else {

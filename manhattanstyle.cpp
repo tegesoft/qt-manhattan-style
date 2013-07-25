@@ -727,7 +727,7 @@ void ManhattanStyle::drawControl(ControlElement element, const QStyleOption *opt
                 } else {
                     painter->setOpacity(0.8);
                 }
-                painter->setPen(Utils::StyleHelper::panelTextColor());
+                painter->setPen(Utils::StyleHelper::panelTextColor(lightColored(widget)));
                 painter->drawText(editRect.adjusted(1, 0, -1, 0), Qt::AlignLeft | Qt::AlignVCenter, text);
 
                 painter->restore();
