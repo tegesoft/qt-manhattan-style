@@ -309,7 +309,7 @@ void ManhattanStyle::polish(QWidget *widget)
             widget->setMaximumHeight(Utils::StyleHelper::navigationWidgetHeight() - 2);
         }
         else if (qobject_cast<QLabel*>(widget))
-            widget->setPalette(panelPalette(widget->palette()));
+            widget->setPalette(panelPalette(widget->palette(), lightColored(widget)));
         else if (widget->property("panelwidget_singlerow").toBool())
             widget->setFixedHeight(Utils::StyleHelper::navigationWidgetHeight());
         else if (qobject_cast<QStatusBar*>(widget))
