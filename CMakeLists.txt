@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 2.8.9)
 
 project(qt-manhattan-style)
 
+if(POLICY CMP0020)
+    # Use new policy (auto link to qtmain.lib when linked to QtCore)
+    cmake_policy(SET CMP0020 NEW)
+endif()
+
 set(SRCS
     stylehelper.cpp
     styledbar.cpp
