@@ -171,7 +171,7 @@ QString ThreeLevelsItemPicker::level3() const
 namespace
 {
 
-QListWidgetItem* find(const ListWidget* list, const QString& name)
+QListWidgetItem* _find(const ListWidget* list, const QString& name)
 {
     for (int row = 0; row < list->count(); ++row)
     {
@@ -183,25 +183,25 @@ QListWidgetItem* find(const ListWidget* list, const QString& name)
     return 0;
 }
 
-} // Anonymous namespace
+} // anonymous namespace
 
 void ThreeLevelsItemPicker::setLevel1Item(const QString& name)
 {
-    QListWidgetItem* item = ::find(m_level1Items, name);
+    QListWidgetItem* item = ::_find(m_level1Items, name);
     if (item)
         m_level1Items->setCurrentItem(item);
 }
 
 void ThreeLevelsItemPicker::setLevel2Item(const QString& name)
 {
-    QListWidgetItem* item = ::find(m_level2Items, name);
+    QListWidgetItem* item = ::_find(m_level2Items, name);
     if (item)
         m_level2Items->setCurrentItem(item);
 }
 
 void ThreeLevelsItemPicker::setLevel3Item(const QString& name)
 {
-    QListWidgetItem* item = ::find(m_level3Items, name);
+    QListWidgetItem* item = ::_find(m_level3Items, name);
     if (item)
         m_level3Items->setCurrentItem(item);
 }
