@@ -37,6 +37,7 @@
 #include <QFont>
 #include <QMouseEvent>
 #include <QMenu>
+#include <QStyleOption>
 #include <QToolTip>
 
 #include <QDebug>
